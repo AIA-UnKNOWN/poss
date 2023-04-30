@@ -2,7 +2,6 @@ import {
   Controller,
   Post,
   Body,
-  HttpStatus,
   UnauthorizedException,
   HttpCode,
 } from '@nestjs/common';
@@ -21,13 +20,7 @@ export class AuthController {
 
   @Post('signup')
   signUp(@Body() userData: SignUpDto) {
-    const [isValidated, errorMessage] = this.authService.validate(userData);
-    if (!isValidated) throw new UnauthorizedException({
-      statusCode: HttpStatus.UNAUTHORIZED,
-      message: 'Unauthorized',
-      error: errorMessage,
-    });
-    return this.userService.create(userData);
+    return this.authService.signUp(userData);
   }
 
   @Post('signin')
