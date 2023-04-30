@@ -4,8 +4,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import * as bcrypt from "bcrypt";
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
-import { ErrorMessage, EssentialUserData, SignInDto, SignUpDto } from './auth.dto';
+import { ErrorMessage, SignInDto, SignInReturnValueDto, SignUpDto } from './auth.dto';
 import { User } from 'src/users/entity/user.entity';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class AuthService {
 
   constructor(
     private readonly userService: UsersService,
+    private jwtService: JwtService,
   ) {}
   
   validate(userData: SignUpDto): [boolean, ErrorMessage] {
@@ -53,13 +55,15 @@ export class AuthService {
     return this.userService.create(userData);
   }
 
-  async signIn(userData: SignInDto): Promise<EssentialUserData> {
+  async signIn(userData: SignInDto): Promise<SignInReturnValueDto> {
     const user = await this.userService.findOneByUsername(userData.username);
     const hashedPassword = user.password;
     const isPasswordMatch = await bcrypt.compare(userData.password, hashedPassword);
     if (!isPasswordMatch) throw new UnauthorizedException();
-    const { password, ...essentialUserData } = user;
-    return essentialUserData;
+    const { id, username } = user;
+    const payload = { username, sub: id };
+    const accessToken = await this.jwtService.signAsync(payload);
+    return { accessToken };
   }
 
 }
