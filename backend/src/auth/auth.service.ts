@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignUpBody } from './interfaces/auth.interface';
+import { ErrorMessage, SignUpDto } from './auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +10,7 @@ export class AuthService {
     password: '',
   }
 
-  validate(userData: SignUpBody): [boolean, typeof this.errorMessage] {
+  validate(userData: SignUpDto): [boolean, ErrorMessage] {
     const { email, username, password, confirmPassword } = userData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const isValidEmail = emailRegex.test(email);

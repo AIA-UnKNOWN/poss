@@ -9,7 +9,7 @@ import {
 import * as bcrypt from "bcrypt";
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
-import { SignInBody, SignUpBody } from './interfaces/auth.interface';
+import { SignInDto, SignUpDto } from './auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -20,7 +20,7 @@ export class AuthController {
   ) {}
 
   @Post('signup')
-  signUp(@Body() userData: SignUpBody) {
+  signUp(@Body() userData: SignUpDto) {
     const [isValidated, errorMessage] = this.authService.validate(userData);
     if (!isValidated) throw new UnauthorizedException({
       statusCode: HttpStatus.UNAUTHORIZED,
@@ -32,7 +32,7 @@ export class AuthController {
 
   @Post('signin')
   @HttpCode(200)
-  async signIn(@Body() userData: SignInBody) {
+  async signIn(@Body() userData: SignInDto) {
     const user = await this.userService.findOneByUsername(userData.username);
     const hashedPassword = user.password;
     const isPasswordMatch = await bcrypt.compare(userData.password, hashedPassword);
