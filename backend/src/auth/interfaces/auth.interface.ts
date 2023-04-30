@@ -1,4 +1,4 @@
-import { User } from "src/users/user.entity";
+import { User } from "src/users/entity/user.entity";
 
 export interface SignUpBody extends User {
   confirmPassword: string;
