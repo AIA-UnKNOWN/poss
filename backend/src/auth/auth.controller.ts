@@ -2,10 +2,9 @@ import {
   Controller,
   Post,
   Body,
-  UnauthorizedException,
   HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
-import * as bcrypt from "bcrypt";
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
 import { SignInDto, SignUpDto } from './auth.dto';
@@ -24,13 +23,9 @@ export class AuthController {
   }
 
   @Post('signin')
-  @HttpCode(200)
-  async signIn(@Body() userData: SignInDto) {
-    const user = await this.userService.findOneByUsername(userData.username);
-    const hashedPassword = user.password;
-    const isPasswordMatch = await bcrypt.compare(userData.password, hashedPassword);
-    if (!isPasswordMatch) throw new UnauthorizedException();
-    return { ...user, password: undefined };
+  @HttpCode(HttpStatus.OK)
+  signIn(@Body() userData: SignInDto) {
+    return this.authService.signIn(userData);
   }
 
 }

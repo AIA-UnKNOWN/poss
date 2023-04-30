@@ -14,3 +14,9 @@ export class SignInDto {
   username: string;
   password: string;
 }
+
+export class EssentialUserData  {
+  id: number;
+  email: string;
+  username: string;
+}

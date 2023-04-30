@@ -3,8 +3,9 @@ import {
   UnauthorizedException,
   HttpStatus,
 } from '@nestjs/common';
+import * as bcrypt from "bcrypt";
 import { UsersService } from 'src/users/users.service';
-import { ErrorMessage, SignUpDto } from './auth.dto';
+import { ErrorMessage, EssentialUserData, SignInDto, SignUpDto } from './auth.dto';
 import { User } from 'src/users/entity/user.entity';
 
 @Injectable()
@@ -50,6 +51,15 @@ export class AuthService {
       error: errorMessage,
     });
     return this.userService.create(userData);
+  }
+
+  async signIn(userData: SignInDto): Promise<EssentialUserData> {
+    const user = await this.userService.findOneByUsername(userData.username);
+    const hashedPassword = user.password;
+    const isPasswordMatch = await bcrypt.compare(userData.password, hashedPassword);
+    if (!isPasswordMatch) throw new UnauthorizedException();
+    const { password, ...essentialUserData } = user;
+    return essentialUserData;
   }
 
 }
