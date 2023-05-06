@@ -7,7 +7,7 @@ import * as bcrypt from "bcrypt";
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { ErrorMessage, SignInDto, SignInReturnValueDto, SignUpDto } from './auth.dto';
-import { User } from 'src/users/entity/user.entity';
+import { UserWithoutPass } from 'src/users/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -45,7 +45,7 @@ export class AuthService {
       : [true, null];
   }
 
-  signUp(userData: SignUpDto): Promise<User> {
+  signUp(userData: SignUpDto): Promise<UserWithoutPass> {
     const [isValidated, errorMessage] = this.validate(userData);
     if (!isValidated) throw new UnauthorizedException({
       statusCode: HttpStatus.UNAUTHORIZED,

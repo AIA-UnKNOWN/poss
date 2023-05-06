@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import * as bcrypt from "bcrypt";
 import { User } from './entity/user.entity';
+import { UserWithoutPass } from './user.dto';
 
 @Injectable()
 export class UsersService {
@@ -12,12 +13,14 @@ export class UsersService {
     private dataSource: DataSource,
   ) {}
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async findAll(): Promise<UserWithoutPass[]> {
+    const users = await this.usersRepository.find();
+    return users.map(({ password, ...userData }) => userData);
   }
 
-  findOne(id: number): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
+  async findOne(id: number): Promise<UserWithoutPass | null> {
+    const { password, ...userData } = await this.usersRepository.findOneBy({ id });
+    return userData;
   }
 
   findOneByUsername(username: string): Promise<User | null> {
@@ -28,15 +31,14 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  async create(userData: User): Promise<User> {
+  async create(userData: User): Promise<UserWithoutPass> {
     let user = new User();
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(userData.password, salt);
     user = { ...userData, password: hashedPassword };
     const savedUser = await this.usersRepository.save(user);
-    const createdUser = await this.findOne(savedUser.id);
-    return { ...createdUser, password: undefined };
+    return this.findOne(savedUser.id);
   }
   
 }
