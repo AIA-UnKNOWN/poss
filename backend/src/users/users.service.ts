@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import * as bcrypt from "bcrypt";
 import { User } from './entity/user.entity';
 import { UserWithoutPass } from './user.dto';
@@ -8,9 +7,8 @@ import { UserWithoutPass } from './user.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
+    @Inject('USER_REPOSITORY')
     private usersRepository: Repository<User>,
-    private dataSource: DataSource,
   ) {}
 
   async findAll(): Promise<UserWithoutPass[]> {

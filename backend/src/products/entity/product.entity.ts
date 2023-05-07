@@ -8,7 +8,9 @@ export class Product {
   @Column()
   name: string;
 
-  @Column('longtext')
+  @Column('longtext', {
+    nullable: true,
+  })
   description: string;
 
   @Column({ nullable: true })
@@ -17,7 +19,7 @@ export class Product {
   @Column({ default: 0 })
   quantity: number;
 
-  @Column()
+  @Column({ nullable: true })
   photoUrl: string;
 
   @UpdateDateColumn()
