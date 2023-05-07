@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { User } from '../users/entity/user.entity';
+import { Product } from '../products/entity/product.entity';
 
 const dataSource = new DataSource({
   type: 'mysql',
@@ -10,6 +11,7 @@ const dataSource = new DataSource({
   database: 'poss',
   entities: [
     User,
+    Product,
   ],
   synchronize: true,
 });
