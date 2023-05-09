@@ -17,7 +17,9 @@ export class UsersService {
   }
 
   async findOne(id: number): Promise<UserWithoutPass | null> {
-    const { password, ...userData } = await this.usersRepository.findOneBy({ id });
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) return null;
+    const { password, ...userData } = user;
     return userData;
   }
 
