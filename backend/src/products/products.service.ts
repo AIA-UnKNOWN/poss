@@ -24,4 +24,8 @@ export class ProductsService {
     return this.productsRepository.save(product);
   }
 
+  findAll(): Promise<Product[]> {
+    return this.productsRepository.find();
+  }
+
 }

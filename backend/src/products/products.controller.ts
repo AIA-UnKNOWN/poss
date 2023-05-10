@@ -22,4 +22,9 @@ export class ProductsController {
     return this.productsService.findOne(productId);
   }
 
+  @Get()
+  findAll() {
+    return this.productsService.findAll();
+  }
+
 }
