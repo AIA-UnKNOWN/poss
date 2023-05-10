@@ -19,7 +19,7 @@ export class ProductsService {
     return product;
   }
 
-  async create(product: ProductDto): Promise<Product> {
+  create(product: ProductDto): Promise<Product> {
     if (_.isEmpty(product)) throw new BadRequestException("Failed to create product due to empty payload");
     return this.productsRepository.save(product);
   }
