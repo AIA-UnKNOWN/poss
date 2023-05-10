@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param } from '@nestjs/common';
 import * as _ from 'lodash';
 import { ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
@@ -15,6 +15,11 @@ export class ProductsController {
   @Post()
   create(@Body() product: ProductDto) {
     return this.productsService.create(product);
+  }
+
+  @Get(':productId')
+  findOne(@Param('productId') productId: number) {
+    return this.productsService.findOne(productId);
   }
 
 }
