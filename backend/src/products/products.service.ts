@@ -1,5 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, BadRequestException } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import * as _ from 'lodash';
 import { Product } from './entity/product.entity';
 import { PRODUCT_REPOSITORY } from './products.provider';
 import { ProductDto } from './products.dto';
@@ -13,6 +14,7 @@ export class ProductsService {
   ) {}
 
   async create(product: ProductDto): Promise<Product> {
+    if (_.isEmpty(product)) throw new BadRequestException("Failed to create product due to empty payload");
     return this.productsRepository.save(product);
   }
 

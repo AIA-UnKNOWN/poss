@@ -14,19 +14,7 @@ export class ProductsController {
 
   @Post()
   create(@Body() product: ProductDto) {
-    if (_.isEmpty(product)) {
-      return {
-        statusCode: 400,
-        message: "Failed to create product due to empty payload",
-        error: "Bad Request"
-      };
-    }
-
-    try {
-      return this.productsService.create(product);
-    } catch(error) {
-      return error;
-    }
+    return this.productsService.create(product);
   }
 
 }
