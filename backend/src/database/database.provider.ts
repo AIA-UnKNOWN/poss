@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../users/entity/user.entity';
 import { Product } from '../products/entity/product.entity';
+import { Category } from '../categories/entity/category.entity';
 
 const dataSource = new DataSource({
   type: 'mysql',
@@ -12,6 +13,7 @@ const dataSource = new DataSource({
   entities: [
     User,
     Product,
+    Category,
   ],
   synchronize: true,
 });
