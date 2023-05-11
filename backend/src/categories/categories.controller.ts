@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CategoryDto } from './category.dto';
 
@@ -12,6 +12,11 @@ export class CategoriesController {
   @Post()
   create(@Body() category: CategoryDto) {
     return this.categoriesService.create(category);
+  }
+
+  @Get()
+  findAll() {
+    return this.categoriesService.findAll();
   }
 
 }

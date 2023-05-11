@@ -19,4 +19,8 @@ export class CategoriesService {
     return this.categoryRepository.save(category);
   }
 
+  findAll(): Promise<Category[]> {
+    return this.categoryRepository.find();
+  }
+
 }
