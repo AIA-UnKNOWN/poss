@@ -1,5 +1,5 @@
 import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import * as _ from 'lodash';
 import { Product } from './entity/product.entity';
 import { PRODUCT_REPOSITORY } from './products.provider';
@@ -26,6 +26,10 @@ export class ProductsService {
 
   findAll(): Promise<Product[]> {
     return this.productsRepository.find();
+  }
+
+  remove(productId: number): Promise<DeleteResult> {
+    return this.productsRepository.delete(productId);
   }
 
 }

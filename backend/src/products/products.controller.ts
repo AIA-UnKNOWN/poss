@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param, Delete } from '@nestjs/common';
 import * as _ from 'lodash';
 import { ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
@@ -25,6 +25,11 @@ export class ProductsController {
   @Get()
   findAll() {
     return this.productsService.findAll();
+  }
+
+  @Delete(':productId')
+  delete(@Param('productId') productId: number) {
+    return this.productsService.remove(productId);
   }
 
 }
