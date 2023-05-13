@@ -1,19 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { Product } from 'src/products/entity/product.entity';
+import { BaseEntity } from 'src/helpers/entity.helper';
 
 @Entity('categories')
-export class Category {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Category extends BaseEntity {
   @Column()
   name: string;
-
-  @UpdateDateColumn()
-  updatedDate: Date;
-  
-  @CreateDateColumn()
-  createdDate: Date;
 
   @OneToMany(
     () => Product,

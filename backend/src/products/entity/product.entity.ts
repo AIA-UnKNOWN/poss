@@ -1,11 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { Category } from 'src/categories/entity/category.entity';
+import { BaseEntity } from 'src/helpers/entity.helper';
 
 @Entity('products')
-export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Product extends BaseEntity {
   @Column()
   name: string;
 
@@ -22,12 +20,6 @@ export class Product {
 
   @Column({ nullable: true })
   photoUrl: string;
-
-  @UpdateDateColumn()
-  updatedDate: Date;
-  
-  @CreateDateColumn()
-  createdDate: Date;
 
   @ManyToOne(
     () => Category,
