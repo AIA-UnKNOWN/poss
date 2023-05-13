@@ -18,6 +18,12 @@ export class Product extends BaseEntity {
   @Column({ default: 0 })
   quantity: number;
 
+  @Column({
+    default: 0,
+    nullable: true,
+  })
+  price: number;
+
   @Column({ nullable: true })
   photoUrl: string;
 
