@@ -1,6 +1,7 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from 'src/categories/entity/category.entity';
 import { BaseEntity } from 'src/helpers/entity.helper';
+import { Photo } from 'src/photos/entity/photos.entity';
 
 @Entity('products')
 export class Product extends BaseEntity {
@@ -33,4 +34,11 @@ export class Product extends BaseEntity {
     { onDelete: 'SET NULL' }
   )
   category: Category;
+
+  @OneToMany(
+    () => Photo,
+    photo => photo.product,
+    { cascade: true }
+  )
+  photos: Photo[];
 }
