@@ -2,6 +2,7 @@ import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from 'src/modules/categories/entity/category.entity';
 import { BaseEntity } from 'src/helpers/entity.helper';
 import { Photo } from 'src/modules/photos/entity/photos.entity';
+import { Order } from 'src/modules/orders/entity/order.entity';
 
 @Entity('products')
 export class Product extends BaseEntity {
@@ -41,4 +42,10 @@ export class Product extends BaseEntity {
     { cascade: true }
   )
   photos: Photo[];
+
+  @OneToMany(
+    () => Order,
+    order => order.product,
+  )
+  orders: Order[];
 }
