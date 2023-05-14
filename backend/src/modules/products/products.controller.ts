@@ -2,7 +2,7 @@ import { Controller, Post, Body, UseGuards, Get, Param, Delete } from '@nestjs/c
 import * as _ from 'lodash';
 import { ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/modules/auth/auth.guard';
 
 @Controller('products')
 @UseGuards(AuthGuard)

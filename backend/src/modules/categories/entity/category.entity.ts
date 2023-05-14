@@ -1,5 +1,5 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { Product } from 'src/products/entity/product.entity';
+import { Product } from 'src/modules/products/entity/product.entity';
 import { BaseEntity } from 'src/helpers/entity.helper';
 
 @Entity('categories')

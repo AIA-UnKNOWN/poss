@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from "bcrypt";
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/modules/users/users.service';
 import { ErrorMessage, SignInDto, SignInReturnValueDto, SignUpDto } from './auth.dto';
-import { UserWithoutPass } from 'src/users/user.dto';
+import { UserWithoutPass } from 'src/modules/users/user.dto';
 
 @Injectable()
 export class AuthService {

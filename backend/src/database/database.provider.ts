@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
-import { User } from '../users/entity/user.entity';
-import { Product } from '../products/entity/product.entity';
-import { Category } from '../categories/entity/category.entity';
-import { Photo } from '../photos/entity/photos.entity';
+import { User } from '../modules/users/entity/user.entity';
+import { Product } from '../modules/products/entity/product.entity';
+import { Category } from '../modules/categories/entity/category.entity';
+import { Photo } from '../modules/photos/entity/photos.entity';
 
 const dataSource = new DataSource({
   type: 'mysql',

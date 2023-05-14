@@ -3,7 +3,7 @@ import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
 import { DatabaseModule } from 'src/database/database.module';
 import { productProviders } from './products.provider';
-import { categoryProviders } from 'src/categories/categories.provider';
+import { categoryProviders } from 'src/modules/categories/categories.provider';
 
 @Module({
   imports: [DatabaseModule],

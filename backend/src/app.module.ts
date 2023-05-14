@@ -4,12 +4,12 @@ import { AppController } from './app.controller';
 // Services
 import { AppService } from './app.service';
 // Modules
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { ProductsModule } from './products/products.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ProductsModule } from './modules/products/products.module';
 import { DatabaseModule } from './database/database.module';
-import { CategoriesModule } from './categories/categories.module';
-import { PhotosModule } from './photos/photos.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { PhotosModule } from './modules/photos/photos.module';
 
 @Module({
   imports: [
