@@ -12,6 +12,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { PhotosModule } from './modules/photos/photos.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
+import { RolesModule } from './modules/roles/roles.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
     PhotosModule,
     OrdersModule,
     TransactionsModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
