@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/helpers/entity.helper';
-import { Entity, Column } from 'typeorm';
+import { Transaction } from 'src/modules/transactions/entity/transaction.entity';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -14,4 +15,10 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToMany(
+    () => Transaction,
+    transaction => transaction.user,
+  )
+  transactions: Transaction[];
 }

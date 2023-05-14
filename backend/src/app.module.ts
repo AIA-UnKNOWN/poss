@@ -11,6 +11,7 @@ import { DatabaseModule } from './database/database.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { PhotosModule } from './modules/photos/photos.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { OrdersModule } from './modules/orders/orders.module';
     CategoriesModule,
     PhotosModule,
     OrdersModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

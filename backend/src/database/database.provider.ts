@@ -4,6 +4,7 @@ import { Product } from '../modules/products/entity/product.entity';
 import { Category } from '../modules/categories/entity/category.entity';
 import { Photo } from '../modules/photos/entity/photos.entity';
 import { Order } from 'src/modules/orders/entity/order.entity';
+import { Transaction } from 'src/modules/transactions/entity/transaction.entity';
 
 const dataSource = new DataSource({
   type: 'mysql',
@@ -18,6 +19,7 @@ const dataSource = new DataSource({
     Category,
     Photo,
     Order,
+    Transaction,
   ],
   synchronize: true,
 });
