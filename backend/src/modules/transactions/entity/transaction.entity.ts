@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntity } from "src/helpers/entity.helper";
 import { User } from "src/modules/users/entity/user.entity";
+import { Order } from "src/modules/orders/entity/order.entity";
 
 @Entity('transactions')
 export class Transaction extends BaseEntity {
@@ -13,4 +14,10 @@ export class Transaction extends BaseEntity {
     { cascade: true }
   )
   user: User;
+
+  @OneToMany(
+    () => Order,
+    order => order.transaction,
+  )
+  orders: Order[];
 }

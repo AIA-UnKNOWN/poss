@@ -1,6 +1,7 @@
 import { Entity, ManyToOne } from "typeorm";
 import { BaseEntity } from "src/helpers/entity.helper";
 import { Product } from "src/modules/products/entity/product.entity";
+import { Transaction } from "src/modules/transactions/entity/transaction.entity";
 
 @Entity('orders')
 export class Order extends BaseEntity {
@@ -10,4 +11,11 @@ export class Order extends BaseEntity {
     { onDelete: 'SET NULL' }
   )
   product: Product;
+
+  @ManyToOne(
+    () => Transaction,
+    transaction => transaction.orders,
+    { cascade: true }
+  )
+  transaction: Transaction;
 }
