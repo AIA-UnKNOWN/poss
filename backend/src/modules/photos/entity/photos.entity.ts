@@ -10,6 +10,7 @@ export class Photo extends BaseEntity {
   @ManyToOne(
     () => Product,
     product => product.photos,
+    { cascade: true }
   )
   product: Product;
 }
