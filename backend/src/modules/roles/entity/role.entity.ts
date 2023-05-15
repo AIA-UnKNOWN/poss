@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 import { BaseEntity } from "src/helpers/entity.helper";
+import { User } from "src/modules/users/entity/user.entity";
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -16,4 +17,10 @@ export class Role extends BaseEntity {
     default: UserRole.CUSTOMER,
   })
   name: UserRole;
+
+  @OneToMany(
+    () => User,
+    user => user.role,
+  )
+  users: User[];
 }
