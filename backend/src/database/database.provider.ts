@@ -1,24 +1,24 @@
 import { DataSource } from 'typeorm';
 
-const dataSource = new DataSource({
+const getDataSource = (processEnv: NodeJS.ProcessEnv) => new DataSource({
   type: 'mysql',
-  host: '172.17.0.1',
-  port: 3306,
-  username: 'root',
-  password: 'AjboyIan_321',
-  database: 'poss',
+  host: processEnv.DATABASE_HOST,
+  port: parseInt(processEnv.DATABASE_PORT) || 3306,
+  username: processEnv.DATABASE_USERNAME,
+  password: processEnv.DATABASE_PASSWORD,
+  database: processEnv.DATABASE_NAME,
   entities: ['dist/modules/**/*.entity.js'],
   migrations: ['dist/database/migrations/*.js'],
-  synchronize: true,
+  synchronize: ['dev', 'development'].includes(processEnv.APP_ENV),
 });
 
 export const databaseProviders = [
   {
     provide: 'DATA_SOURCE',
     useFactory: async () => {
-      return dataSource.initialize();
+      return getDataSource(process.env).initialize();
     },
   },
 ];
 
-export default dataSource;
+export default getDataSource(process.env);
