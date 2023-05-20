@@ -58,16 +58,41 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Typeorm CLI
+These are the commands that can make your development much faster and easier for he backend.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**How to generate an entity**
+```bash
+$ npm run typeorm entity:create src/modules/{moduleName}/entity/{entityName}
+```
+**How to generate automatic migration based on schema**
+> Note: this is done when you have synchronize on and you want to deploy to production
+
+```bash
+$ npm run migration:generate src/database/migrations/MigrationName
+```
+
+**How to create a migration**
+```bash
+$ npm run migration
+```
+
+**How to run migrations**
+```bash
+$ npm run migration:run
+```
+
+**How to revert migrations**
+```bash
+$ npm run migration:revert
+```
+
+**How to show migrations**
+```bash
+$ npm run migration:show
+```
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Author - [Ajboy Ian Abordo](https://www.facebook.com/AjboyIanAbordo)
+- Website - [In Development](#)
