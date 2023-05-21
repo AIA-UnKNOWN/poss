@@ -1,8 +1,12 @@
 ### Backend
 
-# compiled output
+# compiled output in backend
 backend/dist
 backend/node_modules
+
+# compiled output in frontend
+frontend/dist
+frontend/node_modules
 
 # Logs
 backend/logs
