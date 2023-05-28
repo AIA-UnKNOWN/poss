@@ -13,4 +13,5 @@ touch src/components/"$1"/index.ts \
       src/components/"$1"/"$1".tsx \
       src/components/"$1"/"$1".hook.ts \
       src/components/"$1"/"$1".test.tsx \
-      src/components/"$1"/"$1".stories.tsx
+      src/components/"$1"/"$1".stories.tsx \
+      src/components/"$1"/"$1".types.ts
