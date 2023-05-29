@@ -1,0 +1,11 @@
+$primary-color: #AE76F8;
+$white: #ffffff;
+
+.primary-button {
+  background-color: $primary-color;
+  color: $white;
+  height: 40px;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+}
