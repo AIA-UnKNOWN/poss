@@ -1,9 +1,12 @@
+@use '../../poppins.style';
+
 $primary-color: #AE76F8;
 $secondary-color: #DEC5FF;
 $white: #ffffff;
 $standard-border-radius: 10px;
 
 .primary-button {
+  font-family: 'Poppins', sans-serif;
   background-color: $primary-color;
   color: $white;
   display: flex;
