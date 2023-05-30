@@ -1,26 +1,22 @@
 @use '../../poppins.style';
-
-$primary-color: #AE76F8;
-$secondary-color: #DEC5FF;
-$white: #ffffff;
-$standard-border-radius: 10px;
+@use '../../variables' as globalVariables;
 
 .primary-button {
   font-family: 'Poppins', sans-serif;
-  background-color: $primary-color;
-  color: $white;
+  background-color: globalVariables.$primary-color;
+  color: globalVariables.$white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  border-radius: $standard-border-radius;
+  border-radius: globalVariables.$standard-border-radius;
   padding: 10px;
   border: none;
   cursor: pointer;
 
 
   &:active {
-    background-color: $secondary-color;
+    background-color: globalVariables.$secondary-color;
   }
 
   .icon-container {
