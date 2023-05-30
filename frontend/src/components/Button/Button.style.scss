@@ -7,7 +7,6 @@ $standard-border-radius: 10px;
   background-color: $primary-color;
   color: $white;
   display: flex;
-  gap: 5px;
   justify-content: center;
   align-items: center;
   height: 40px;
@@ -24,6 +23,7 @@ $standard-border-radius: 10px;
   .icon-container {
     width: 20px;
     height: 20px;
+    margin-right: 5px;
     
     svg {
       width: 100%;
