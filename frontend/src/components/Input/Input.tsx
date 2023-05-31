@@ -1,4 +1,5 @@
-import React from 'react';
+import './Input.style.scss';
+import React, { useRef, useEffect } from 'react';
 // Types
 import type { Input } from './Input.types';
 // Icons
@@ -11,6 +12,17 @@ const Input: React.FC<Input> = props => {
     view = 'hasLeftIcon',
     showIcon = false,
   } = props;
+  const inputContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.addEventListener('focus', () => {
+      inputContainerRef.current?.classList.add('focus');
+    });
+    inputRef.current?.addEventListener('blur', () => {
+      inputContainerRef.current?.classList.remove('focus');
+    });
+  }, []);
 
   const renderIcon = () : JSX.Element | null => {
     let icon = null;
@@ -39,9 +51,9 @@ const Input: React.FC<Input> = props => {
   }
   
   return (
-    <div>
+    <div ref={inputContainerRef} className='input-container'>
       {showIcon && view === 'hasLeftIcon' && renderIcon()}
-      <input {...props} />
+      <input ref={inputRef} {...props} />
       {showIcon && view === 'hasRightIcon' && renderIcon()}
     </div>
   );

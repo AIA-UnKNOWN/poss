@@ -27,5 +27,6 @@ export const Primary: Story = {
     showIcon: false,
     view: 'hasLeftIcon',
     iconName: 'none',
+    placeholder: 'Placeholder here',
   },
 };
