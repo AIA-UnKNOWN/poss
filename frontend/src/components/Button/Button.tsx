@@ -6,7 +6,12 @@ import { FaAngleLeft } from "react-icons/fa";
 import type { Button } from './Button.types';
 
 const Button: React.FC<Button> = props => {
-  const { text, iconName } = props;
+  const {
+    text,
+    iconName,
+    showLeftIcon = false,
+    showText = true,
+  } = props;
 
   const renderIcon = () : JSX.Element | null => {
     let icon = null;
@@ -14,6 +19,7 @@ const Button: React.FC<Button> = props => {
       case 'angle-left':
         icon = <FaAngleLeft />;
         break;
+      case 'none':
       default:
         icon = null;
     }
@@ -26,8 +32,8 @@ const Button: React.FC<Button> = props => {
 
   return (
     <button className='primary-button'>
-      {renderIcon()}
-      {text}
+      {showLeftIcon && renderIcon()}
+      {showText && text}
     </button>
   )
 }
