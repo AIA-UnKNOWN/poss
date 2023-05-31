@@ -6,9 +6,15 @@ export enum Icon {
   Plus = 'plus',
 }
 
+export enum Size {
+  Small = 'sm',
+  Medium = 'md',
+}
+
 export interface Button {
   text: string;
   iconName?: Icon;
   showLeftIcon?: boolean;
   showText?: boolean;
+  size?: Size;
 }

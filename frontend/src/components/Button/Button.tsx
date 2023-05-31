@@ -11,6 +11,7 @@ const Button: React.FC<Button> = props => {
     iconName,
     showLeftIcon = false,
     showText = true,
+    size = 'md',
   } = props;
 
   const renderIcon = () : JSX.Element | null => {
@@ -34,8 +35,7 @@ const Button: React.FC<Button> = props => {
     }
     return icon === null ? null : (
       <div
-        className='icon-container'
-        style={{ marginRight: showLeftIcon && showText ? '10px' : '0' }}
+        className={`icon-container ${showLeftIcon && showText && 'icon-gap'}`}
       >
         {icon}
       </div>
@@ -43,7 +43,7 @@ const Button: React.FC<Button> = props => {
   }
 
   return (
-    <button className='primary-button'>
+    <button className={`primary-button button-${size}`}>
       {showLeftIcon && renderIcon()}
       {showText && text}
     </button>
