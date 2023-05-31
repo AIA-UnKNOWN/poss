@@ -3,6 +3,7 @@
 
 .primary-button {
   font-family: 'Poppins', sans-serif;
+  font-size: globalVariables.$medium-2-text;
   background-color: globalVariables.$primary-color;
   color: globalVariables.$white;
   display: flex;
