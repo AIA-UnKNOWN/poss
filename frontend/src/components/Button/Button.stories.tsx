@@ -22,5 +22,7 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     text: 'My Button',
+    showLeftIcon: false,
+    showText: true,
   },
 };
