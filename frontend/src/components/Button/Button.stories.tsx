@@ -9,6 +9,9 @@ const meta: Meta<typeof Button> = {
    */
   title: 'components/Button',
   component: Button,
+  argTypes: {
+    onClick: { action: 'onClick' },
+  },
 };
 
 export default meta;
@@ -24,5 +27,6 @@ export const Primary: Story = {
     text: 'My Button',
     showLeftIcon: false,
     showText: true,
+    onClick: () => alert('Clicked'),
   },
 };

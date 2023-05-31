@@ -12,6 +12,7 @@ const Button: React.FC<Button> = props => {
     showLeftIcon = false,
     showText = true,
     size = 'md',
+    onClick,
   } = props;
 
   const renderIcon = () : JSX.Element | null => {
@@ -43,7 +44,10 @@ const Button: React.FC<Button> = props => {
   }
 
   return (
-    <button className={`primary-button button-${size}`}>
+    <button
+      className={`primary-button button-${size}`}
+      onClick={onClick}
+    >
       {showLeftIcon && renderIcon()}
       {showText && text}
     </button>

@@ -17,4 +17,5 @@ export interface Button {
   showLeftIcon?: boolean;
   showText?: boolean;
   size?: Size;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
 }
