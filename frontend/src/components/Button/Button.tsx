@@ -33,7 +33,10 @@ const Button: React.FC<Button> = props => {
         icon = null;
     }
     return icon === null ? null : (
-      <div className='icon-container'>
+      <div
+        className='icon-container'
+        style={{ marginRight: showLeftIcon && showText ? '10px' : '0' }}
+      >
         {icon}
       </div>
     );
