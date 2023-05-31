@@ -1,7 +1,7 @@
 import './Button.style.scss';
 import React from 'react';
 // Icons
-import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus } from "react-icons/fa";
 // Types
 import type { Button } from './Button.types';
 
@@ -18,6 +18,15 @@ const Button: React.FC<Button> = props => {
     switch(iconName) {
       case 'angle-left':
         icon = <FaAngleLeft />;
+        break;
+      case 'angle-right':
+        icon = <FaAngleRight />;
+        break;
+      case 'minus':
+        icon = <FaMinus />
+        break;
+      case 'plus':
+        icon = <FaPlus />
         break;
       case 'none':
       default:
