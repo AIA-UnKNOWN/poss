@@ -1,10 +1,10 @@
 FROM node:18-slim
+
+# Setup backend
 WORKDIR /app
-COPY backend/package.json /app/backend/package.json
-WORKDIR /app/backend
+COPY package.json package-lock.json ./
 RUN npm install
-WORKDIR /app
-COPY . /app
 RUN apt-get update && apt-get install -y procps
-WORKDIR /app/backend
+COPY . .
 CMD ["npm", "run", "start:dev"]
+EXPOSE 3000

@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: AjboyIan_321
+      DATABASE_NAME: poss
+      APP_ENV: dev
+  frontend:
+    build: ./frontend
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - poss-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: AjboyIan_321
+      MYSQL_DATABASE: poss
+
+volumes:
+  poss-mysql-data:
