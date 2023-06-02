@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    container_name: poss-backend-container
     ports:
       - 3000:3000
     volumes:
@@ -15,6 +16,7 @@ services:
       APP_ENV: dev
   frontend:
     build: ./frontend
+    container_name: poss-frontend-container
     ports:
       - 5173:5173
       - 6006:6006
