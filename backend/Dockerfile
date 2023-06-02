@@ -1,9 +1,7 @@
 FROM node:18
 
 # Setup backend
-WORKDIR /usr/src/backend-app
+WORKDIR /home/poss-backend
 COPY package*.json ./
 RUN npm install
-COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "start:dev"]

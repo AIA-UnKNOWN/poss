@@ -2,11 +2,17 @@ services:
   backend:
     build: ./backend
     container_name: poss-backend-container
+    command: 'npm run start:dev'
     ports:
       - 3000:3000
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend/tsconfig.json:/home/poss-backend/tsconfig.json
+      - ./backend/tsconfig.build.json:/home/poss-backend/tsconfig.build.json
+      - ./backend/src:/home/poss-backend/src
+      - ./backend/test:/home/poss-backend/test
+      - ./backend/package.json:/home/poss-backend/package.json
+      - ./backend/package-lock.json:/home/poss-backend/package-lock.json
+      - ./backend/nest-cli.json:/home/poss-backend/nest-cli.json
     environment:
       DATABASE_HOST: mysql
       DATABASE_PORT: 3306
