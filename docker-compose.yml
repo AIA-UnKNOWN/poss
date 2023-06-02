@@ -17,12 +17,21 @@ services:
   frontend:
     build: ./frontend
     container_name: poss-frontend-container
+    command: 'npm run dev'
     ports:
       - 5173:5173
       - 6006:6006
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./frontend/index.html:/home/poss-frontend/index.html
+      - ./frontend/public:/home/poss-frontend/public
+      - ./frontend/vite.config.ts:/home/poss-frontend/vite.config.ts
+      - ./frontend/tsconfig.json:/home/poss-frontend/tsconfig.json
+      - ./frontend/tsconfig.node.json:/home/poss-frontend/tsconfig.node.json
+      - ./frontend/src:/home/poss-frontend/src
+      - ./frontend/.storybook:/home/poss-frontend/.storybook
+      - ./frontend/cli:/home/poss-frontend/cli
+      - ./frontend/package.json:/home/poss-frontend/package.json
+      - ./frontend/package-lock.json:/home/poss-frontend/package-lock.json
   mysql:
     image: mysql:8.0
     volumes:
