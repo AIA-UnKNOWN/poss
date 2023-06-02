@@ -1,9 +1,9 @@
-FROM node:18-slim
+FROM node:18
 
 # Setup frontend
-WORKDIR /app
-COPY package.json package-lock.json ./
+WORKDIR /usr/src/frontend-app
+COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["npm", "run", "dev"]
 EXPOSE 5173
+CMD ["npm", "run", "dev"]
