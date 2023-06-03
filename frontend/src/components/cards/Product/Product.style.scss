@@ -1,0 +1,44 @@
+@use '../../../variables' as globalVariables;
+
+.product {
+  border-radius: globalVariables.$standard-border-radius-md;
+  padding: 15px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 250px;
+  gap: 10px;
+  background-color: globalVariables.$white;
+
+  .product-image-container {
+    background-color: globalVariables.$gray;
+    border-radius: globalVariables.$standard-border-radius-md;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 100%;
+      border-radius: inherit;
+    }
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: globalVariables.$medium-2-text;
+    font-family: 'Poppins', sans-serif;
+    gap: 5px;
+
+    .product-name {
+      color: globalVariables.$black;
+      text-align: center;
+    }
+
+    .product-price {
+      font-weight: 700;
+    }
+  }
+}
