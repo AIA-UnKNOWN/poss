@@ -40,6 +40,8 @@ services:
       - ./frontend/package-lock.json:/home/poss-frontend/package-lock.json
   mysql:
     image: mysql:8.0
+    ports:
+      - 3306:3306
     volumes:
       - poss-mysql-data:/var/lib/mysql
     environment:
