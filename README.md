@@ -34,5 +34,5 @@ docker compose down
 ## Running the storybook
 In order the run storybook for your frontend run the command start its server.
 ```shell
-docker exec -it poss-frontend-container bash -c "npm run storybook"
+docker exec -it poss-frontend-container sh -c "npm run storybook"
 ```
