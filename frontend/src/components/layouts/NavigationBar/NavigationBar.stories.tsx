@@ -7,7 +7,7 @@ const meta: Meta<typeof NavigationBar> = {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'layouts/NavigationBar',
+  title: 'components/layouts/NavigationBar',
   component: NavigationBar,
 };
 
