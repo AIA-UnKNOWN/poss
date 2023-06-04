@@ -1,4 +1,4 @@
-@use '../../../variables' as globalVariables;
+@use 'src/variables' as globalVariables;
 
 .product {
   border-radius: globalVariables.$standard-border-radius-md;

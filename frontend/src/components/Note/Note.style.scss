@@ -1,5 +1,5 @@
-@use '../../index.style';
-@use '../../variables' as globalVariables;
+@use 'src/index.style';
+@use 'src/variables' as globalVariables;
 
 .note {
   display: flex;
