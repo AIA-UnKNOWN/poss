@@ -84,5 +84,10 @@
     gap: 5px;
     font-family: 'Poppins', sans-serif;
     font-size: globalVariables.$medium-2-text;
+
+    .product-quantity {
+      min-width: 20px;
+      text-align: center;
+    }
   }
 }
