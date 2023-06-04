@@ -10,5 +10,5 @@ export type Product = {
 
 export interface ProductProps {
   product: Product;
-  view?: string;
+  view?: 'default' | 'order-item';
 }
