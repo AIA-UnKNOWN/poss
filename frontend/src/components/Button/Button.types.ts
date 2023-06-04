@@ -1,15 +1,6 @@
-export enum Icon {
-  None = 'none',
-  AngleLeft = 'angle-left',
-  AngleRight = 'angle-right',
-  Minus = 'minus',
-  Plus = 'plus',
-}
+export type Icon = 'none' | 'angle-left' | 'angle-right' | 'minus' | 'plus';
 
-export enum Size {
-  Small = 'sm',
-  Medium = 'md',
-}
+export type Size = 'sm' | 'md';
 
 export interface Button {
   text: string;
