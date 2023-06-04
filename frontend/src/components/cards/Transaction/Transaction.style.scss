@@ -1,0 +1,41 @@
+@use '../../../variables' as globalVariables;
+@use '../../../poppins.style';
+
+.transaction {
+  font-family: 'Poppins', sans-serif;
+  background-color: globalVariables.$white;
+  border-radius: globalVariables.$standard-border-radius-md;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  cursor: pointer;
+
+  .transaction-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    .details {
+
+      .transaction-id {
+        margin-right: 20px;
+      }      
+
+      .transaction-owner {
+        color: globalVariables.$black;
+      }
+    }
+
+    .transaction-date {
+      font-size: globalVariables.$medium-1-text;
+      color: globalVariables.$black;
+    }
+  }
+
+  .transaction-total-amount {
+    font-weight: 600;
+  }
+}
