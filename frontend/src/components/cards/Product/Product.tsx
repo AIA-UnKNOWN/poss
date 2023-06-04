@@ -2,11 +2,14 @@ import './Product.style.scss';
 import React from "react";
 import type { ProductProps } from "./Product.types";
 import Button from '../../Button/Button';
+import useProduct from './Product.hook';
 
 const Product: React.FC<ProductProps> = props => {
   const {
     product,
     view = 'default',
+    onIncrement,
+    onDecrement,
   } = props;
   const {
     name,
@@ -14,6 +17,13 @@ const Product: React.FC<ProductProps> = props => {
     photoUrl,
     quantity,
   } = product;
+  const {
+    // States
+    productQuantity,
+    // Functions
+    incrementQuantity,
+    decrementQuantity,
+  } = useProduct({ quantity, onIncrement, onDecrement });
 
   const renderProduct = () : JSX.Element => {
     switch(view) {
@@ -36,19 +46,21 @@ const Product: React.FC<ProductProps> = props => {
             </div>
             <div className='order-item-quantity-control'>
               <Button
-                text='increment'
-                showText={false}
-                showLeftIcon={true}
-                iconName='plus'
-                size='sm'
-              />
-              <span>{quantity}</span>
-              <Button
                 text='decrement'
                 showText={false}
                 showLeftIcon={true}
                 iconName='minus'
                 size='sm'
+                onClick={decrementQuantity}
+              />
+              <span className='product-quantity'>{productQuantity}</span>
+              <Button
+                text='increment'
+                showText={false}
+                showLeftIcon={true}
+                iconName='plus'
+                size='sm'
+                onClick={incrementQuantity}
               />
             </div>
           </div>

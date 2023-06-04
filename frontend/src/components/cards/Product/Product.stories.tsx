@@ -29,6 +29,12 @@ export const Primary: Story = {
       quantity: 87,
     },
     view: 'default',
+    onDecrement: decrementedQuantity => {
+      console.log('decrementedQuantity', decrementedQuantity);
+    },
+    onIncrement: incrementedQuantity => {
+      console.log('incrementedQuantity', incrementedQuantity);
+    },
   },
 };
 export const WithManyProducts: Story = {
