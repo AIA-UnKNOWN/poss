@@ -30,6 +30,7 @@
   }
 
   input {
+    font-family: globalVariables.$font-family;
     border: none;
     flex-grow: 1;
     font-size: globalVariables.$small-2-text;

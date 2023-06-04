@@ -1,8 +1,7 @@
-@use '../../poppins.style';
 @use '../../variables' as globalVariables;
 
 .primary-button {
-  font-family: 'Poppins', sans-serif;
+  font-family: globalVariables.$font-family;
   font-size: globalVariables.$medium-2-text;
   background-color: globalVariables.$primary-color;
   color: globalVariables.$white;

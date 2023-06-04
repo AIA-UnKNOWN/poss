@@ -2,7 +2,7 @@
 @use '../../../poppins.style';
 
 .transaction {
-  font-family: 'Poppins', sans-serif;
+  font-family: globalVariables.$font-family;
   background-color: globalVariables.$white;
   border-radius: globalVariables.$standard-border-radius-md;
   padding: 15px 20px;

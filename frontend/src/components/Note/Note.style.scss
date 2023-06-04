@@ -1,5 +1,4 @@
 @use '../../index.style';
-@use '../../poppins.style';
 @use '../../variables' as globalVariables;
 
 .note {
@@ -11,7 +10,7 @@
   border-radius: 10px;
 
   span {
-    font-family: 'Poppins', sans-serif;
+    font-family: globalVariables.$font-family;
     font-size: globalVariables.$medium-2-text;
     font-weight: 400;
   }
