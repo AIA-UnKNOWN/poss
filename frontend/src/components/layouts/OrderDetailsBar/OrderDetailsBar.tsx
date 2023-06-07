@@ -4,6 +4,7 @@ import React from 'react';
 import type { OrderDetailsBarProps } from './OrderDetailsBar.types';
 import Product from 'src/components/cards/Product';
 import Button from 'src/components/Button';
+import SalesInfo from 'src/components/cards/SalesInfo/SalesInfo';
 
 
 const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
@@ -23,8 +24,8 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
         </div>
       </div>
       <div className='order-amount-info'>
-        <div>
-          Amount Info here
+        <div className='sales-info-container'>
+          <SalesInfo subTotal={150} />
         </div>
         <Button
           text='Checkout'
