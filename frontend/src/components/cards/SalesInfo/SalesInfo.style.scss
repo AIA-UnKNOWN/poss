@@ -1,0 +1,26 @@
+@use 'src/variables' as globalVariables;
+
+.sales-info {
+  font-family: globalVariables.$font-family;
+
+  .sales-info_details {
+    padding-bottom: 10px;
+  }
+
+  .sales-info_item,
+  .sales-info_total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .sales-info_label {
+      font-weight: 700;
+    }
+  }
+
+  .sales-info_total {
+    border-top: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+    padding: 10px 0;
+  }
+}
