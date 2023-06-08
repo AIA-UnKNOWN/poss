@@ -1,18 +1,13 @@
 services:
   backend:
-    build: ./backend
+    image: node:18-alpine
     container_name: poss-backend-container
-    command: 'npm run start:dev'
+    command: sh -c 'npm install && npm run start:dev'
+    working_dir: /home/poss-backend
     ports:
       - 3000:3000
     volumes:
-      - ./backend/tsconfig.json:/home/poss-backend/tsconfig.json
-      - ./backend/tsconfig.build.json:/home/poss-backend/tsconfig.build.json
-      - ./backend/src:/home/poss-backend/src
-      - ./backend/test:/home/poss-backend/test
-      - ./backend/package.json:/home/poss-backend/package.json
-      - ./backend/package-lock.json:/home/poss-backend/package-lock.json
-      - ./backend/nest-cli.json:/home/poss-backend/nest-cli.json
+      - ./backend:/home/poss-backend
     environment:
       DATABASE_HOST: mysql
       DATABASE_PORT: 3306
@@ -21,23 +16,15 @@ services:
       DATABASE_NAME: poss
       APP_ENV: dev
   frontend:
-    build: ./frontend
+    image: node:18-alpine
     container_name: poss-frontend-container
-    command: 'npm run dev'
+    command: sh -c 'npm install && npm run dev'
+    working_dir: /home/poss-frontend
     ports:
       - 5173:5173
       - 6006:6006
     volumes:
-      - ./frontend/index.html:/home/poss-frontend/index.html
-      - ./frontend/public:/home/poss-frontend/public
-      - ./frontend/vite.config.ts:/home/poss-frontend/vite.config.ts
-      - ./frontend/tsconfig.json:/home/poss-frontend/tsconfig.json
-      - ./frontend/tsconfig.node.json:/home/poss-frontend/tsconfig.node.json
-      - ./frontend/src:/home/poss-frontend/src
-      - ./frontend/.storybook:/home/poss-frontend/.storybook
-      - ./frontend/cli:/home/poss-frontend/cli
-      - ./frontend/package.json:/home/poss-frontend/package.json
-      - ./frontend/package-lock.json:/home/poss-frontend/package-lock.json
+      - ./frontend:/home/poss-frontend
   mysql:
     image: mysql:8.0
     ports:
