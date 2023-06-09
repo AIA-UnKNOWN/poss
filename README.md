@@ -7,7 +7,7 @@ After installing docker in your machine, we only need to run one command and thi
 
 > Note: You should be in the app root directory when running this command.
 ```shell
-docker compose up
+CURRENT_UID=$(id -u):$(id -g) docker compose up
 ``` 
 Now open the app in your browser with the url [http://localhost:5173](http://localhost:5173).
 
