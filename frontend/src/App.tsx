@@ -1,12 +1,30 @@
-import './App.css'
+import './App.scss';
+import { Suspense, lazy } from 'react';
+
+// Components
+import FullLayout from './components/layouts/FullLayout/FullLayout';
+// Store
+import useNavigationStore, { PageName } from './store/navigation';
+// Views
+const Inventory = lazy(() => import('./views/Inventory/Inventory'));
+
 
 function App() {
+  const { pageName } = useNavigationStore();
+
+  const renderContent = (pageName: PageName) => {
+    switch (pageName) {
+      case PageName.INVENTORY:
+        return <Inventory />;
+    }
+  }
 
   return (
-    <>
-      <h1>Welcome to POSS application!</h1>
-      <h2>(Currently In Development)</h2>
-    </>
+    <FullLayout>
+      <Suspense fallback={(<h1>Loading...</h1>)}>
+        {renderContent(pageName)}
+      </Suspense>
+    </FullLayout>
   )
 }
 
