@@ -1,0 +1,13 @@
+@use 'src/variables' as globalVariables;
+
+.layout {
+  display: flex;
+  justify-content: space-between;
+  font-family: globalVariables.$font-family;
+
+  .main-content {
+    flex: 1;
+    background-color: globalVariables.$gray-2;
+    padding: 25px 45px;
+  }
+}
