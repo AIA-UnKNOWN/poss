@@ -1,6 +1,8 @@
+import { PageName } from "src/store/navigation";
+
 export type Nav = {
-  label: string;
-  onClick: (navLabel: string) => any;
+  label: PageName;
+  onClick: (navLabel: PageName) => any;
 }
 
 export interface NavigationBarProps {

@@ -1,43 +1,39 @@
+import useNavigationStore, { PageName } from "src/store/navigation"
+import { NavigationBarProps } from "../NavigationBar/NavigationBar.types";
+import { OrderDetailsBarProps } from "../OrderDetailsBar/OrderDetailsBar.types";
+
 const useFullLayout = () => {
-  const navigationBarProps = {
+  const { navigateToPage } = useNavigationStore();
+
+  const navigationBarProps: NavigationBarProps = {
     companyName:"AIA POSS",
     logoUrl: `https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Vitejs-logo.svg/1039px-Vitejs-logo.svg.png`,
     upperNav: [
       {
-        label: 'Products',
-        onClick: (navLabel) => {
-          alert(navLabel)
-        },
+        label: PageName.PRODUCTS,
+        onClick: navigateToPage,
       },
       {
-        label: 'Transactions',
-        onClick: (navLabel) => {
-          alert(navLabel)
-        },
+        label: PageName.TRANSACTIONS,
+        onClick: navigateToPage,
       },
       {
-        label: 'Dashboard',
-        onClick: (navLabel) => {
-          alert(navLabel)
-        },
+        label: PageName.DASHBOARD,
+        onClick: navigateToPage,
       },
       {
-        label: 'Inventory',
-        onClick: (navLabel) => {
-          alert(navLabel)
-        },
+        label: PageName.INVENTORY,
+        onClick: navigateToPage,
       },
     ],
     lowerNav: [
       {
-        label: 'Sign Out',
-        onClick: (navLabel) => {
-          alert(navLabel)
-        },
+        label: PageName.SIGN_OUT,
+        onClick: () => {},
       },
     ],
   }
-  const orderDetailsBar = {
+  const orderDetailsBar: OrderDetailsBarProps = {
     products: [
       {
         name: 'Vitamilk',
