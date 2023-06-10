@@ -1,14 +1,22 @@
 import { create } from "zustand";
 import { devtools } from 'zustand/middleware'
 
+export enum PageName {
+  PRODUCTS = 'Products',
+  TRANSACTIONS = 'Transactions',
+  DASHBOARD = 'Dashboard',
+  INVENTORY = 'Inventory',
+  SIGN_OUT = 'Sign Out',
+}
+
 export interface Navigation {
-  pageName: string;
-  navigateToPage: (pageName: string) => void,
+  pageName: PageName;
+  navigateToPage: (pageName: PageName) => void,
 }
 
 const useNavigationStore = create<Navigation>()(
   devtools((set) => ({
-    pageName: '',
+    pageName: PageName.INVENTORY,
     navigateToPage: pageName => set(state => ({ pageName })),
   }))
 );
