@@ -3,11 +3,11 @@ import { Suspense, lazy } from 'react';
 
 // Components
 import FullLayout from './components/layouts/FullLayout/FullLayout';
-import Transactions from './views/Transactions/Transactions';
 // Store
 import useNavigationStore, { PageName } from './store/navigation';
 // Views
 const Inventory = lazy(() => import('./views/Inventory/Inventory'));
+const Transactions = lazy(() => import('./views/Transactions/Transactions'));
 
 
 function App() {
