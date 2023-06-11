@@ -9,5 +9,7 @@
     flex: 1;
     background-color: globalVariables.$gray-2;
     padding: 25px 45px;
+    overflow-y: auto;
+    height: 100vh;
   }
 }
