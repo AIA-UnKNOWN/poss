@@ -1,0 +1,17 @@
+@use 'src/index.style';
+@use 'src/variables' as globalVariables;
+
+.transactions {
+  $gap: 10px;
+
+  .transactions-trxs {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+
+    .transaction {
+      width: calc(50% - $gap);
+    }
+  }
+}

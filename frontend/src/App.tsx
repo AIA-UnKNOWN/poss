@@ -3,6 +3,7 @@ import { Suspense, lazy } from 'react';
 
 // Components
 import FullLayout from './components/layouts/FullLayout/FullLayout';
+import Transactions from './views/Transactions/Transactions';
 // Store
 import useNavigationStore, { PageName } from './store/navigation';
 // Views
@@ -14,6 +15,8 @@ function App() {
 
   const renderContent = (pageName: PageName) => {
     switch (pageName) {
+      case PageName.TRANSACTIONS:
+        return <Transactions />;
       case PageName.INVENTORY:
         return <Inventory />;
     }
