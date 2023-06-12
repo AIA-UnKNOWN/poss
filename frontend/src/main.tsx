@@ -6,7 +6,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import App from './App.tsx'
+// Views
+import SignIn from './views/SignIn';
+import App from './App.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signin",
-    element: <h1>SignIn Page</h1>
+    element: <SignIn />
   },
 ]);
 

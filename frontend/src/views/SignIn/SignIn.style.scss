@@ -1,0 +1,31 @@
+@use 'src/variables' as globalVariables;
+
+.signin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: globalVariables.$gray-2;
+
+  .signin-form-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    background-color: globalVariables.$white;
+    border-radius: globalVariables.$standard-border-radius-md;
+
+    .input-container,
+    input {
+      background-color: globalVariables.$gray-2;
+    }
+
+    a {
+      font-size: globalVariables.$medium-1-text;
+      cursor: pointer;
+      text-align: center;
+      font-family: globalVariables.$font-family;
+    }
+  }
+}
