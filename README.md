@@ -7,7 +7,7 @@ After installing docker in your machine, we only need to run one command and thi
 
 > Note: You should be in the app root directory when running this command.
 ```shell
-CURRENT_UID=$(id -u):$(id -g) docker compose up
+CURRENT_UID=$(id -u):$(id -g) docker compose up -d
 ``` 
 Now open the app in your browser with the url [http://localhost:5173](http://localhost:5173).
 
@@ -27,7 +27,7 @@ docker logs -f <mysql-container-name-or-id>
 ```
 
 ## Stopping the container
-Press `CTRL + C` on your keyboard and run the command the remove the containers and networks it created.
+Press `CTRL + C` on your keyboard and run the command to remove the containers and networks it created.
 ```shell
 docker compose down
 ``` 
