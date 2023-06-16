@@ -27,6 +27,8 @@ services:
       - 6006:6006
     volumes:
       - ./frontend:/home/poss-frontend
+    environment:
+      VITE_APP_API_URL: http://localhost:3000
   mysql:
     image: mysql:8.0
     ports:
