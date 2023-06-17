@@ -3,19 +3,16 @@ import './SignIn.style.scss';
 // Views
 import Input from "src/components/Input";
 import Button from 'src/components/Button/Button';
-// Store
-import useUserStore from 'src/store/user';
 // Hooks
 import useSignIn from './SignIn.hook';
 
-const SignIn = props => {
-  const {
-    isAuthenticated,
-    signIn,
-  } = useUserStore();
+const SignIn = () => {
   const {
     form,
+    isAuthenticated,
+    isLoading,
     handleChange,
+    signIn,
   } = useSignIn();
 
   return (
@@ -42,7 +39,7 @@ const SignIn = props => {
           onChange={e => handleChange(e.target.name, e.target.value)}
         />
         <Button
-          text='Sign In'
+          text={isLoading ? 'Signing In...' : 'Sign In'}
           onClick={() => signIn({ username: form.username, password: form.password })}
         />
         <a>Sign up instead</a>
