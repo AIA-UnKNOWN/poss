@@ -1,23 +1,20 @@
-const domain = 'http://127.0.0.1:3000';
-const endpoint = `${domain}/auth`;
+import axios from 'axios';
 
-export type SignInProps = {
+const endpoint = `${import.meta.env.VITE_APP_API_URL}/auth`;
+
+export type SignInData = {
   username: string;
   password: string;
 }
 
 const authService = {
-  signIn: async ({ username, password }: SignInProps) => {
-    const response = await fetch(`${endpoint}/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await response.json();
-    return data;
-  },
+  signIn: (data: SignInData) => new Promise(
+    (resolve, reject) => {
+      axios.post(`${endpoint}/signIn`, data)
+        .then(response => resolve(response.data))
+        .catch(error => reject(error));
+    }
+  ),
 };
 
 export default authService;
