@@ -1,9 +1,16 @@
+import { removeCookie } from "typescript-cookie";
+
 import useNavigationStore, { PageName } from "src/store/navigation"
 import { NavigationBarProps } from "../NavigationBar/NavigationBar.types";
 import { OrderDetailsBarProps } from "../OrderDetailsBar/OrderDetailsBar.types";
 
 const useFullLayout = () => {
   const { navigateToPage } = useNavigationStore();
+
+  const logout = () => {
+    removeCookie('ut');
+    location.href = '/signin';
+  }
 
   const navigationBarProps: NavigationBarProps = {
     companyName:"AIA POSS",
@@ -29,7 +36,7 @@ const useFullLayout = () => {
     lowerNav: [
       {
         label: PageName.SIGN_OUT,
-        onClick: () => {},
+        onClick: logout,
       },
     ],
   }
