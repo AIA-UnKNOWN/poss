@@ -34,6 +34,7 @@ const NavigationBar: React.FC<NavigationBarProps> = props =>  {
         <ul className='upper-nav'>
           {upperNav?.map(nav => (
             <li
+              key={nav.label}
               className='nav'
               onClick={() => nav.onClick?.(nav.label)}
             >
@@ -47,6 +48,7 @@ const NavigationBar: React.FC<NavigationBarProps> = props =>  {
         <ul className='lower-nav'>
           {lowerNav?.map(nav => (
             <li
+              key={nav.label}
               className='nav'
               onClick={() => nav.onClick?.(nav.label)}
             >

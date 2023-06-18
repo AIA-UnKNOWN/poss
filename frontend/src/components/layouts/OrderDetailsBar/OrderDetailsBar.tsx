@@ -15,8 +15,9 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
       <div className='order-items-container'>
         <span className='label'>Order Cart</span>
         <div className='order-items'>
-          {products?.map(product => (
+          {products?.map((product, i) => (
             <Product
+              key={i}
               view='order-item'
               product={product}
             />
