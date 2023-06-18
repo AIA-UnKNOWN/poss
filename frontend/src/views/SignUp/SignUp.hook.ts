@@ -2,7 +2,7 @@ import { useState } from "react";
 import { setCookie } from "typescript-cookie";
 
 // Services
-import authService from "src/services/auth.service";
+import authService from "src/services/auth";
 
 const useSignUp = () => {
   const [form, setForm] = useState({

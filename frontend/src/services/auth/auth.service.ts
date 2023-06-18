@@ -1,16 +1,11 @@
 import axios from 'axios';
+// Types
+import type {
+  SignInData,
+  SignUpData,
+} from './auth.service.types';
 
 const endpoint = `${import.meta.env.VITE_APP_API_URL}/auth`;
-
-export type SignInData = {
-  username: string;
-  password: string;
-}
-
-export type SignUpData = SignInData & {
-  email: string;
-  confirmPassword: string;
-}
 
 const authService = {
   signIn: (data: SignInData) => new Promise(
