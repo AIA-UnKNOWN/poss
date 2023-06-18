@@ -9,6 +9,7 @@ import {
 // Views
 import SignIn from './views/SignIn';
 import App from './App.tsx';
+import SignUp from './views/SignUp/SignUp.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <h1>SignUp Page</h1>
+    element: <SignUp />
   },
   {
     path: "/signin",
