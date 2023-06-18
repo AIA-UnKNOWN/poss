@@ -42,7 +42,7 @@ const SignIn = () => {
           text={isLoading ? 'Signing In...' : 'Sign In'}
           onClick={() => signIn({ username: form.username, password: form.password })}
         />
-        <a>Sign up instead</a>
+        <a href='/signup'>Sign up instead</a>
       </div>
     </div>
   )
