@@ -15,7 +15,6 @@ const useSignUp = () => {
     email: '',
     username: '',
     password: '',
-    confirmPassword: '',
   });
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +39,7 @@ const useSignUp = () => {
       location.href = '/signin';
     } catch(error) {
       console.log('SIGNUN_ERROR', error);
+      setFormError(error.response.data.error);
       setIsAuthenticated(false);
     }
     setIsLoading(false);

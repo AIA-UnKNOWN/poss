@@ -21,6 +21,15 @@
     .input-container,
     input {
       background-color: globalVariables.$gray-2;
+
+    }
+
+    .input-error-message {
+      color: globalVariables.$red;
+      font-family: globalVariables.$font-family;
+      font-size: globalVariables.$small-2-text;
+      margin-left: 5px;
+      margin-top: 5px;
     }
 
     a {
