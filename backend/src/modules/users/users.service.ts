@@ -2,7 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import * as bcrypt from "bcrypt";
 import { User } from './entity/user.entity';
-import { UserWithoutPass } from './user.dto';
+import { CreateUserDto, UserWithoutPass } from './user.dto';
 
 @Injectable()
 export class UsersService {
@@ -31,12 +31,14 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  async create(userData: User): Promise<UserWithoutPass> {
+  async create(userData: CreateUserDto): Promise<UserWithoutPass> {
     let user = new User();
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(userData.password, salt);
-    user = { ...userData, password: hashedPassword };
+    user.email = userData.email;
+    user.username = userData.username;
+    user.password = hashedPassword;
     const savedUser = await this.usersRepository.save(user);
     return this.findOne(savedUser.id);
   }

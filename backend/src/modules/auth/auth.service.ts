@@ -6,8 +6,8 @@ import {
 import * as bcrypt from "bcrypt";
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/modules/users/users.service';
-import { ErrorMessage, SignInDto, SignInReturnValueDto, SignUpDto } from './auth.dto';
-import { UserWithoutPass } from 'src/modules/users/user.dto';
+import { SignInDto, SignInReturnValueDto } from './auth.dto';
+import { CreateUserDto, UserWithoutPass } from 'src/modules/users/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,42 +16,8 @@ export class AuthService {
     private readonly userService: UsersService,
     private jwtService: JwtService,
   ) {}
-  
-  validate(userData: SignUpDto): [boolean, ErrorMessage] {
-    let errorMessage: ErrorMessage = {
-      email: '',
-      username: '',
-      password: '',
-    }
-    const { email, username, password, confirmPassword } = userData;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const isValidEmail = emailRegex.test(email);
 
-    if (!email) errorMessage.email = 'Email field is required'
-      else errorMessage.email = '';
-    if (!isValidEmail) errorMessage.email = 'Email field is not a valid email';
-      else errorMessage.email = '';
-    if (!username) errorMessage.username = 'Username field is required';
-      else errorMessage.username = '';
-    if (!password) errorMessage.password = 'Password field is required';
-      else errorMessage.password = '';
-    if (password.length < 10) errorMessage.password = 'Password length too short';
-      else errorMessage.password = '';
-    if (password !== confirmPassword) errorMessage.password = "Password doesn't match";
-      else errorMessage.password = '';
-
-    return errorMessage.email || errorMessage.username || errorMessage.password
-      ? [false, errorMessage]
-      : [true, null];
-  }
-
-  signUp(userData: SignUpDto): Promise<UserWithoutPass> {
-    const [isValidated, errorMessage] = this.validate(userData);
-    if (!isValidated) throw new UnauthorizedException({
-      statusCode: HttpStatus.UNAUTHORIZED,
-      message: 'Unauthorized',
-      error: errorMessage,
-    });
+  signUp(userData: CreateUserDto): Promise<UserWithoutPass> {
     return this.userService.create(userData);
   }
 
