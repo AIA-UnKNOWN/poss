@@ -10,7 +10,12 @@ const useSignUp = () => {
     password: '',
     confirmPassword: '',
   });
-  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [formError, setFormError] = useState({
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,7 +39,7 @@ const useSignUp = () => {
       location.href = '/signin';
     } catch(error) {
       console.log('SIGNUN_ERROR', error);
-      setFormErrors(() => [...error.response.data.message]);
+      setFormError(() => ({ ...error.response.data.error }));
       setIsAuthenticated(false);
     }
     setIsLoading(false);
@@ -42,7 +47,7 @@ const useSignUp = () => {
 
   return {
     form,
-    formErrors,
+    formError,
     isAuthenticated,
     isLoading,
     handleChange,
