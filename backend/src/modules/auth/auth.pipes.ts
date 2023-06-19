@@ -32,7 +32,6 @@ export class ValidationPipe implements PipeTransform<any> {
       err[validationError.property] = constraints.length > 1
         ? constraints.map(constraint => validationError.constraints[constraint])
         : validationError.constraints[constraints[0]];
-      console.log('err', validationError.constraints[constraints[0]]);
       return err;
     }, {});
     return error;
