@@ -1,7 +1,8 @@
 import './App.scss';
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { getCookie } from 'typescript-cookie';
+import { Suspense, lazy } from 'react';
 
+// Hooks
+import useApp from './App.hook';
 // Components
 import FullLayout from './components/layouts/FullLayout/FullLayout';
 // Store
@@ -13,22 +14,7 @@ const Transactions = lazy(() => import('./views/Transactions/Transactions'));
 
 function App() {
   const { pageName } = useNavigationStore();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const hasCookie = checkIfHasCookie();
-    setIsAuthenticated(hasCookie);
-  }, []);
-
-  const checkIfHasCookie = () : boolean => {
-    if (getCookie('ut')) return true;
-    redirectBackToSignInPage();
-    return false;
-  }
-
-  const redirectBackToSignInPage = () => {
-    location.href = '/signin';
-  }
+  const { isAuthenticated } = useApp();
 
   const renderContent = (pageName: PageName) => {
     switch (pageName) {
