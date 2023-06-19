@@ -1,3 +1,5 @@
+import { IsNotEmpty, IsString } from "class-validator";
+
 export class ErrorMessage {
   email: string;
   username: string;
@@ -5,7 +7,12 @@ export class ErrorMessage {
 }
 
 export class SignInDto {
+  @IsString()
+  @IsNotEmpty()
   username: string;
+  
+  @IsString()
+  @IsNotEmpty()
   password: string;
 }
 

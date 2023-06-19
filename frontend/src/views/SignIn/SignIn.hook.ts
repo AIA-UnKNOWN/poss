@@ -9,6 +9,10 @@ const useSignIn = () => {
     username: '',
     password: '',
   });
+  const [formError, setFormError] = useState({
+    username: '',
+    password: '',
+  });
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,13 +32,15 @@ const useSignIn = () => {
       location.href = '/';
     } catch(error) {
       console.log('SIGNIN_ERROR', error);
-      setIsAuthenticated(false);
+      setFormError(() => ({ ...error.response.data.error }));
+      setIsAuthenticated(!error.response.data.error ? false : null);
     }
     setIsLoading(false);
   }
 
   return {
     form,
+    formError,
     isAuthenticated,
     isLoading,
     handleChange,

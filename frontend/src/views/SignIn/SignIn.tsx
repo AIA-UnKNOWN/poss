@@ -9,6 +9,7 @@ import useSignIn from './SignIn.hook';
 const SignIn = () => {
   const {
     form,
+    formError,
     isAuthenticated,
     isLoading,
     handleChange,
@@ -24,20 +25,30 @@ const SignIn = () => {
             view='danger'
           />
         )}
-        <Input
-          type="text"
-          placeholder='Username'
-          name="username"
-          value={form.username}
-          onChange={e => handleChange(e.target.name, e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder='Password'
-          name="password"
-          value={form.password}
-          onChange={e => handleChange(e.target.name, e.target.value)}
-        />
+        <div>
+          <Input
+            type="text"
+            placeholder='Username'
+            name="username"
+            value={form.username}
+            onChange={e => handleChange(e.target.name, e.target.value)}
+          />
+          {formError.username && (
+            <span className='input-error-message'>{formError.username}</span>
+          )}
+        </div>
+        <div>
+          <Input
+            type="password"
+            placeholder='Password'
+            name="password"
+            value={form.password}
+            onChange={e => handleChange(e.target.name, e.target.value)}
+          />
+          {formError.password && (
+            <span className='input-error-message'>{formError.password}</span>
+          )}
+        </div>
         <Button
           text={isLoading ? 'Signing In...' : 'Sign In'}
           onClick={() => signIn({ username: form.username, password: form.password })}
