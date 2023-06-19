@@ -4,11 +4,11 @@ import {
   Body,
   HttpCode,
   HttpStatus,
-  ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './auth.dto';
 import { CreateUserDto } from '../users/user.dto';
+import { ValidationPipe } from './auth.pipes';
 
 @Controller('auth')
 export class AuthController {
