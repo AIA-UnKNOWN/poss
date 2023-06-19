@@ -17,8 +17,8 @@ const SignUp = () => {
   } = useSignUp();
 
   return (
-    <div className='signup'>
-      <div className='signup-form-container'>
+    <div className='auth'>
+      <div className='auth-form-container'>
         <div>
           <Input
             type="email"

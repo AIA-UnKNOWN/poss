@@ -16,8 +16,8 @@ const SignIn = () => {
   } = useSignIn();
 
   return (
-    <div className='signin'>
-      <div className='signin-form-container'>
+    <div className='auth'>
+      <div className='auth-form-container'>
         {isAuthenticated !== null && !isAuthenticated && (
           <Note
             text='Username/Password is invalid. Please try again.'

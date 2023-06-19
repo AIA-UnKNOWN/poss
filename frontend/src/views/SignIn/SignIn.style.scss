@@ -1,15 +1,15 @@
 @use 'src/variables' as globalVariables;
 
-.signin,
-.signup {
+.auth,
+.auth {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: globalVariables.$gray-2;
 
-  .signin-form-container, 
-  .signup-form-container {
+  .auth-form-container, 
+  .auth-form-container {
     width: 300px;
     display: flex;
     flex-direction: column;
