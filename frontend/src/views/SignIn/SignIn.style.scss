@@ -30,6 +30,11 @@
       font-size: globalVariables.$small-2-text;
       margin-left: 5px;
       margin-top: 5px;
+      display: inline-block;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
 
     a {
