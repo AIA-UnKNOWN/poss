@@ -8,7 +8,6 @@ import {
 import { AuthService } from './auth.service';
 import { SignInDto } from './auth.dto';
 import { CreateUserDto } from '../users/user.dto';
-import { ValidationPipe } from './auth.pipes';
 
 @Controller('auth')
 export class AuthController {
@@ -18,13 +17,13 @@ export class AuthController {
   ) {}
 
   @Post('signup')
-  signUp(@Body(new ValidationPipe()) userData: CreateUserDto) {
+  signUp(@Body() userData: CreateUserDto) {
     return this.authService.signUp(userData);
   }
 
   @Post('signin')
   @HttpCode(HttpStatus.OK)
-  signIn(@Body(new ValidationPipe()) userData: SignInDto) {
+  signIn(@Body() userData: SignInDto) {
     return this.authService.signIn(userData);
   }
 
