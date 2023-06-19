@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { setCookie } from "typescript-cookie";
 
 // Services
 import authService from "src/services/auth";
@@ -11,11 +10,7 @@ const useSignUp = () => {
     password: '',
     confirmPassword: '',
   });
-  const [formError, setFormError] = useState({
-    email: '',
-    username: '',
-    password: '',
-  });
+  const [formErrors, setFormErrors] = useState<string[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +34,7 @@ const useSignUp = () => {
       location.href = '/signin';
     } catch(error) {
       console.log('SIGNUN_ERROR', error);
-      setFormError(error.response.data.error);
+      setFormErrors(() => [...error.response.data.message]);
       setIsAuthenticated(false);
     }
     setIsLoading(false);
@@ -47,7 +42,7 @@ const useSignUp = () => {
 
   return {
     form,
-    formError,
+    formErrors,
     isAuthenticated,
     isLoading,
     handleChange,
