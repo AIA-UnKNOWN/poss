@@ -8,12 +8,15 @@ const useApp = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (!getCookie('ut')) {
-      redirectBackToSignInPage();
-      return;
-    }
-    getCurrentUser();
+    const hasCookie = checkIfHasCookie();
+    if (hasCookie) getCurrentUser();
   }, []);
+
+  const checkIfHasCookie = () : boolean => {
+    if (getCookie('ut')) return true;
+    redirectBackToSignInPage();
+    return false;
+  }
 
   const getCurrentUser = async () : Promise<void> => {
     const hasUser = await userStore.getCurrentUser();
