@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
 import { getCookie } from 'typescript-cookie';
+// Store
+import useUserStore from './store/user';
 
 const useApp = () => {
+  const userStore = useUserStore();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const hasCookie = checkIfHasCookie();
-    setIsAuthenticated(hasCookie);
+    if (!getCookie('ut')) {
+      redirectBackToSignInPage();
+      return;
+    }
+    getCurrentUser();
   }, []);
 
-  const checkIfHasCookie = () : boolean => {
-    if (getCookie('ut')) return true;
-    redirectBackToSignInPage();
-    return false;
+  const getCurrentUser = async () : Promise<void> => {
+    const hasUser = await userStore.getCurrentUser();
+    console.log({ hasUser });
+    if (!hasUser) redirectBackToSignInPage();
+    setIsAuthenticated(hasUser);
   }
 
   const redirectBackToSignInPage = () => {
