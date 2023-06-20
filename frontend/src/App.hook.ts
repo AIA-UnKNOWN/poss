@@ -17,7 +17,6 @@ const useApp = () => {
 
   const getCurrentUser = async () : Promise<void> => {
     const hasUser = await userStore.getCurrentUser();
-    console.log({ hasUser });
     if (!hasUser) redirectBackToSignInPage();
     setIsAuthenticated(hasUser);
   }
