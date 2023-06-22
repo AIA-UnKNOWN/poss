@@ -10,6 +10,7 @@ import Product from "src/components/cards/Product/Product";
 const Inventory = props => {
   const {
     products,
+    categories,
   } = useInventory();
 
   return (
@@ -25,11 +26,15 @@ const Inventory = props => {
           />
         </div>
         <div className='inventory-categories'>
-          {new Array(15).fill(null).map((_, i) => (
-            <button key={i} className='category'>
-              Category {i+1}
+          {categories.length > 0 ? categories.map(category => (
+            <button key={category.id} className='category'>
+              {category.name}
             </button>
-          ))}
+          )) : (
+            <div className='no-category-state'>
+              <span>No categories available.</span>
+            </div>
+          )}
         </div>
       </div>
       <div className="inventory-products-container">
