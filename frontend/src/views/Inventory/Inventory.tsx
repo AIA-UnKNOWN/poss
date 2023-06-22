@@ -39,12 +39,16 @@ const Inventory = props => {
           />
         </div>
         <div className="inventory-products">
-          {products.map(product => (
+          {products.length > 0 ? products.map(product => (
             <Product
               key={product.id}
               product={product}
             />
-          ))}
+          )) : (
+            <div className='no-product-state'>
+              <span>No products available.</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

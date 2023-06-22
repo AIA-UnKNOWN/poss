@@ -52,6 +52,20 @@
         flex: 1;
         min-width: 200px;
       }
+
+      .no-product-state {
+        width: 100%;
+        height: 200px;
+        background-color: globalVariables.$white;
+        border-radius: globalVariables.$standard-border-radius-md;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          font-family: globalVariables.$font-family;
+        }
+      }
     }
   }
 }
