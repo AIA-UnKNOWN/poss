@@ -2,16 +2,8 @@ import { create } from "zustand";
 import { devtools } from 'zustand/middleware';
 // Services
 import productsService from "src/services/products/products.service";
-
-export type Product = {
-  name: string;
-  quantity: number;
-  id?: number;
-  description?: string;
-  code?: string;
-  photoUrl?: string;
-  categoryId?: number;
-}
+// Types
+import type { Product } from "src/components/cards/Product/Product.types";
 
 export type ProductState = {
   data: Product[],
