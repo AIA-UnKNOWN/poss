@@ -32,12 +32,10 @@ const Product: React.FC<ProductProps> = props => {
           <div className="product order-item">
             <div className='order-item-details'>
               <div className='product-image-container order-item'>
-                {photoUrl && (
-                  <img
-                    src={photoUrl}
-                    alt={name}
-                  />
-                )}
+                <img
+                  src={photoUrl || "/empty-image.jpg"}
+                  alt={name || "No Image"}
+                />
               </div>
               <div className='product-details order-item'>
                 <span className='product-name order-item'>{name}</span>
@@ -69,12 +67,10 @@ const Product: React.FC<ProductProps> = props => {
         return (
           <div className="product">
             <div className='product-image-container'>
-              {photoUrl && (
-                <img
-                  src={photoUrl}
-                  alt={name}
-                />
-              )}
+              <img
+                src={photoUrl || "/empty-image.jpg"}
+                alt={name || "No Image"}
+              />
             </div>
             <div className='product-details'>
               <span className='product-name'>{name}</span>
