@@ -1,9 +1,9 @@
 import './EmptyState.style.scss';
 import React from 'react';
 // Types
-import type { EmtpyStateProps } from './EmptyState.types';
+import type { EmptyStateProps } from './EmptyState.types';
 
-const EmptyState: React.FC<EmtpyStateProps> = props => {
+const EmptyState: React.FC<EmptyStateProps> = props => {
   const {
     text,
     customContentRender,

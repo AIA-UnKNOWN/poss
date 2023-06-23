@@ -1,4 +1,4 @@
-export interface EmtpyStateProps {
+export interface EmptyStateProps {
   text: string;
   className?: string;
   customContentRender?: JSX.Element;
