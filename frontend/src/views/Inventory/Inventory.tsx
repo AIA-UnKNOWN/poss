@@ -6,8 +6,9 @@ import useInventory from './Inventory.hook';
 import Input from "src/components/Input/Input";
 import Button from "src/components/Button";
 import Product from "src/components/cards/Product/Product";
+import EmptyState from 'src/components/cards/EmptyState/EmptyState';
 
-const Inventory = props => {
+const Inventory = () => {
   const {
     products,
     categories,
@@ -31,9 +32,9 @@ const Inventory = props => {
               {category.name}
             </button>
           )) : (
-            <div className='no-category-state'>
-              <span>No categories available.</span>
-            </div>
+            <EmptyState
+              text='No categories available.'
+            />
           )}
         </div>
       </div>
@@ -50,9 +51,9 @@ const Inventory = props => {
               product={product}
             />
           )) : (
-            <div className='no-product-state'>
-              <span>No products available.</span>
-            </div>
+            <EmptyState
+              text='No products available.'
+            />
           )}
         </div>
       </div>
