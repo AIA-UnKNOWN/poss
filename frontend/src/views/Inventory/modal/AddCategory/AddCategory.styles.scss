@@ -1,0 +1,17 @@
+@use 'src/variables' as globalVariables;
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: globalVariables.$white-2;
+  padding: 20px;
+  width: 500px;
+
+  .modal-title {
+    font-family: globalVariables.$font-family;
+    font-size: globalVariables.$large-text;
+    font-weight: 700;
+    text-align: center;
+  }
+}
