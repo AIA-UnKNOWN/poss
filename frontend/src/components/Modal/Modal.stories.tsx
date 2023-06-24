@@ -23,6 +23,7 @@ type Story = StoryObj<typeof Modal>;
  */
 export const Primary: Story = {
   args: {
+    isOpen: true,
     children: (
       <div>
         <span>This is a sample modal</span>

@@ -5,11 +5,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ReactModal from 'react-modal';
 
 // Views
 import SignIn from './views/SignIn';
 import App from './App.tsx';
 import SignUp from './views/SignUp/SignUp.tsx';
+
+ReactModal.setAppElement('#root');
 
 const router = createBrowserRouter([
   {
