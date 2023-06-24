@@ -1,4 +1,5 @@
 import './Products.styles.scss';
+import { memo } from 'react';
 // Components
 import Product from "src/components/cards/Product/Product";
 import EmptyState from 'src/components/cards/EmptyState/EmptyState';
@@ -24,4 +25,4 @@ const Products = () => {
   )
 }
 
-export default Products;
+export default memo(Products);

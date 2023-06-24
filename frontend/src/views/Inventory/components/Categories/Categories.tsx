@@ -1,4 +1,5 @@
 import './Categories.styles.scss';
+import { memo } from 'react';
 // Components
 import EmptyState from 'src/components/cards/EmptyState/EmptyState';
 // Hooks
@@ -22,4 +23,4 @@ const Categories = () => {
   )
 }
 
-export default Categories;
+export default memo(Categories);
