@@ -1,16 +1,16 @@
 import './Products.styles.scss';
-import React from 'react';
 // Components
 import Product from "src/components/cards/Product/Product";
 import EmptyState from 'src/components/cards/EmptyState/EmptyState';
-// Types
-import type { ProductsProps } from './Products.types';
+// Hooks
+import useProducts from './Products.hook';
 
-const Products: React.FC<ProductsProps> = ({ data }) => {
+const Products = () => {
+  const { products } = useProducts();
 
   return (
     <div className="inventory-products">
-      {data.length > 0 ? data.map(product => (
+      {products.length > 0 ? products.map(product => (
         <Product
           key={product.id}
           product={product}

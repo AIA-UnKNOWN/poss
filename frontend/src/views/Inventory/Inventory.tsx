@@ -11,8 +11,6 @@ import Categories from './components/Categories/Categories';
 
 const Inventory = () => {
   const {
-    products,
-    categories,
     isModalOpen,
     toggleModal,
   } = useInventory();
@@ -38,7 +36,7 @@ const Inventory = () => {
               onClick={toggleModal}
             />
           </div>
-          <Categories data={categories} />
+          <Categories />
         </div>
         <div className="inventory-products-container">
           <div className="actions-container">
@@ -47,7 +45,7 @@ const Inventory = () => {
               onClick={toggleModal}
             />
           </div>
-          <Products data={products} />
+          <Products />
         </div>
       </div>
     </>
