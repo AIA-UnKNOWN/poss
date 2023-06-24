@@ -8,20 +8,33 @@ import Button from "src/components/Button";
 import Modal from 'src/components/Modal';
 import Products from './components/Products/Products';
 import Categories from './components/Categories/Categories';
+// Modals
+import AddCategory from './modal/AddCategory/AddCategory';
+import AddProduct from './modal/AddProduct/AddProduct';
 
 const Inventory = () => {
   const {
     isModalOpen,
+    modalLabel,
     toggleModal,
   } = useInventory();
+
+  const renderModalContent = () => {
+    switch(modalLabel) {
+      case 'ADD_CATEGORY':
+        return <AddCategory />;
+      case 'ADD_PRODUCT':
+        return <AddProduct />;
+    }
+  }
 
   return (
     <>
       <Modal
         isOpen={isModalOpen}
-        onCloseModal={toggleModal}
+        onCloseModal={() => toggleModal()}
       >
-        <h1>This is modal</h1>
+        {renderModalContent()}
       </Modal>
       
       <div className="inventory">
@@ -33,7 +46,7 @@ const Inventory = () => {
           <div className="actions-container">
             <Button
               text="Add category"
-              onClick={toggleModal}
+              onClick={() => toggleModal('ADD_CATEGORY')}
             />
           </div>
           <Categories />
@@ -42,7 +55,7 @@ const Inventory = () => {
           <div className="actions-container">
             <Button
               text="Add product"
-              onClick={toggleModal}
+              onClick={() => toggleModal('ADD_PRODUCT')}
             />
           </div>
           <Products />
