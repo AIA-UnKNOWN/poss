@@ -1,10 +1,10 @@
 @use 'src/index.style';
 @use 'src/variables' as globalVariables;
 
-.inventory {
-  $gap: 10px;
-  height: 100%;
+$gap: 10px;
 
+.inventory {
+  height: 100%;
 
   .inventory-categories-container,
   .inventory-products-container {
@@ -12,46 +12,6 @@
 
     .actions-container {
       padding-bottom: 10px;
-    }
-  }
-
-  .inventory-categories-container {
-
-    .inventory-categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: $gap;
-
-      .category {
-        font-family: globalVariables.$font-family;
-        border: none;
-        width: calc(100% / 7 - $gap);
-        padding: 10px 0;
-        border-radius: globalVariables.$standard-border-radius-md;
-        background-color: globalVariables.$white;
-        cursor: pointer;
-
-        &:hover {
-          background-color: globalVariables.$primary-color;
-          color: globalVariables.$white;
-        }
-      }
-    }
-  }
-
-  .inventory-products-container {
-    
-    .inventory-products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: $gap;
-      height: 100%;
-
-      .product {
-        flex: 1;
-        min-width: 200px;
-      }
     }
   }
 }

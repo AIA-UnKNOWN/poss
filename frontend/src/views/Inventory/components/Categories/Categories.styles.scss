@@ -1,0 +1,23 @@
+@use 'src/variables' as globalVariables;
+@use 'src/views/Inventory/Inventory.style' as inventoryStyles;
+
+.inventory-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: inventoryStyles.$gap;
+
+  .category {
+    font-family: globalVariables.$font-family;
+    border: none;
+    width: calc(100% / 7 - inventoryStyles.$gap);
+    padding: 10px 0;
+    border-radius: globalVariables.$standard-border-radius-md;
+    background-color: globalVariables.$white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: globalVariables.$primary-color;
+      color: globalVariables.$white;
+    }
+  }
+}
