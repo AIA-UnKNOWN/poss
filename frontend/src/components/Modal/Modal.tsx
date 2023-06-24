@@ -19,7 +19,7 @@ const customStyles = {
   },
 };
 
-const Modal: React.FC<Modal> = ({ isOpen, children }) => {
+const Modal: React.FC<Modal> = ({ isOpen, onCloseModal, children }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   useEffect(() => {
@@ -36,6 +36,9 @@ const Modal: React.FC<Modal> = ({ isOpen, children }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    // Use this one if you want to sync the modal state and your component state.
+    // Possible issue found if not synced => You'll have to double click sometimes to toggle the modal
+    typeof onCloseModal === 'function' && onCloseModal();
   }
 
   return (
