@@ -1,0 +1,31 @@
+@use 'src/variables' as globalVariables;
+
+$gap: 15px;
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: globalVariables.$white-2;
+  padding: 20px;
+  width: 500px;
+
+  .modal-title {
+    font-family: globalVariables.$font-family;
+    font-size: globalVariables.$large-text;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .multi-input-container {
+    display: flex;
+    gap: $gap;
+
+    .input-container {
+      width: 50%;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
