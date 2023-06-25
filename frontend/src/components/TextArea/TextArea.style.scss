@@ -1,0 +1,23 @@
+@use 'src/variables' as globalVariables;
+
+.textarea-container {
+  background-color: globalVariables.$white;
+  border-radius: globalVariables.$standard-border-radius-md;
+
+  .textarea {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    font-family: globalVariables.$font-family;
+    resize: none;
+    height: 150px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: inherit;
+
+    &:focus {
+      border: 2px solid globalVariables.$primary-color;
+    }
+  }
+}
