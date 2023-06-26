@@ -2,6 +2,15 @@
 
 .file-uploader-container {
 
+  &.drag-enter {
+    border: 2px solid globalVariables.$primary-color;
+    border-radius: globalVariables.$standard-border-radius-md;
+
+    .file-uploader {
+      color: globalVariables.$primary-color;
+    }
+  }
+
   #aia-poss-file-input {
     display: none;
   }

@@ -1,5 +1,5 @@
 import './FileUploader.style.scss';
-import React from 'react';
+import React, { useRef } from 'react';
 import { FaFileUpload } from 'react-icons/fa';
 // Types
 import type { FileUploaderProps } from './FileUploader.types';
@@ -8,6 +8,7 @@ import useFileUploader from './FileUploader.hook';
 
 const FileUploader: React.FC<FileUploaderProps> = props => {
   const id = `aia-poss-file-input-${Math.random()}`;
+  const fileUploaderContainerRef = useRef(null);
   const {
     fileName,
     file,
@@ -16,11 +17,24 @@ const FileUploader: React.FC<FileUploaderProps> = props => {
     dragOverHandler,
   } = useFileUploader(props);
 
+  const dragEnterHandler = e => {
+    e.preventDefault();
+    fileUploaderContainerRef?.current?.classList.add('drag-enter');
+  }
+
+  const dragLeaverHandler = e => {
+    e.preventDefault();
+    fileUploaderContainerRef?.current?.classList.remove('drag-enter');
+  }
+
   return (
     <div
+      ref={fileUploaderContainerRef}
       className='file-uploader-container'
       onDrop={dropHandler}
       onDragOver={dragOverHandler}
+      onDragEnter={dragEnterHandler}
+      onDragLeave={dragLeaverHandler}
     >
       <input
         id={id}
