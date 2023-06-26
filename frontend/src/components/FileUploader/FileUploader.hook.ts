@@ -32,10 +32,38 @@ const useFileUploader = (props: FileUploaderProps) => {
     URL.revokeObjectURL(file);
   }
 
+  const dropHandler = e => {
+    // Prevent default behavior (Prevent file from being opened)
+    e.preventDefault();
+    if (e.dataTransfer.items) {
+      // Use DataTransferItemList interface to access the file(s)
+      [...e.dataTransfer.items].forEach((item, i) => {
+        if (item.kind === "file") {
+          const file = item.getAsFile();
+          setFileName(file.name);
+          setFile(URL.createObjectURL(file));
+        }
+      });
+    } else {
+      // Use DataTransfer interface to access the file(s)
+      [...e.dataTransfer.files].forEach((file, i) => {
+        setFileName(file.name);
+        setFile(URL.createObjectURL(file));
+      });
+    }
+  }
+
+  const dragOverHandler = e => {
+    // Prevent default behavior (Prevent file from being opened)
+    e.preventDefault();
+  }
+
   return {
     fileName,
     file,
     handleFileUpload,
+    dropHandler,
+    dragOverHandler,
   }
 }
 

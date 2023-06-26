@@ -12,10 +12,16 @@ const FileUploader: React.FC<FileUploaderProps> = props => {
     fileName,
     file,
     handleFileUpload,
+    dropHandler,
+    dragOverHandler,
   } = useFileUploader(props);
 
   return (
-    <div className='file-uploader-container'>
+    <div
+      className='file-uploader-container'
+      onDrop={dropHandler}
+      onDragOver={dragOverHandler}
+    >
       <input
         id={id}
         type="file"
