@@ -1,41 +1,21 @@
 import './FileUploader.style.scss';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaFileUpload } from 'react-icons/fa';
 // Types
-import { FileUploaderProps } from './FileUploader.types';
+import type { FileUploaderProps } from './FileUploader.types';
+// Hooks
+import useFileUploader from './FileUploader.hook';
 // Components
 import Button from '../Button';
 
 const FileUploader: React.FC<FileUploaderProps> = props => {
-  const {
-    onChange,
-  } = props;
-
   const id = `aia-poss-file-input-${Math.random()}`;
-  const [fileName, setFileName] = useState("");
-  const [file, setFile] = useState("");
-
-  useEffect(() => {
-    return () => {
-      removeUploadedFile();
-    }
-  }, []);
-
-  const handleFileUpload = (files: FileList | null) => {
-    const file = files?.[0] || null;
-    
-    if (!file) return;
-    setFileName(file.name);
-    setFile(URL.createObjectURL(file));
-    onChange?.(files);
-  }
-
-  const removeUploadedFile = () => {
-    if (!file) return;
-    setFile("");
-    setFileName("");
-    URL.revokeObjectURL(file);
-  }
+  const {
+    fileName,
+    file,
+    handleFileUpload,
+    removeUploadedFile,
+  } = useFileUploader(props);
 
   return (
     <div className='file-uploader-container'>
