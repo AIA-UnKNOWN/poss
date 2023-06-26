@@ -3,6 +3,7 @@ import './AddProduct.styles.scss';
 import Button from "src/components/Button/Button";
 import Input from "src/components/Input/Input";
 import TextArea from 'src/components/TextArea/TextArea';
+import FileUploader from 'src/components/FileUploader';
 
 const AddProduct = () => {
 
@@ -33,6 +34,9 @@ const AddProduct = () => {
       </div>
       <TextArea
         placeholder='Description'
+      />
+      <FileUploader
+        onChange={files => console.log('FileUploader files', files)}
       />
       <Button
         text="Add"

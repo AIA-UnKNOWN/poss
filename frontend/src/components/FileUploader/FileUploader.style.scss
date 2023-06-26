@@ -1,0 +1,54 @@
+@use 'src/variables' as globalVariables;
+
+.file-uploader-container {
+
+  #aia-poss-file-input {
+    display: none;
+  }
+
+  .file-uploader {
+    background-color: globalVariables.$white;
+    height: 200px;
+    border-radius: globalVariables.$standard-border-radius-md;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: globalVariables.$font-family;
+    color: globalVariables.$gray-3;
+
+    #file-upload-icon {
+      font-size: 70px;
+    }
+
+    .label {
+      font-size: globalVariables.$small-2-text;
+    }
+  }
+
+  .uploaded-file-container {
+    border-radius: globalVariables.$standard-border-radius-md;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .remove-file-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: .5;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+    
+    & > img {
+      border-radius: inherit;
+      width: 100%;
+    }
+  }
+}
