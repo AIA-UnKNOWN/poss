@@ -11,6 +11,7 @@ export type Category = {
 export type CategoryState = {
   data: Category[],
   getAll: () => Promise<void>,
+  create: (categoryName: string) => Promise<void>,
 }
 
 const useCategoryStore = create<CategoryState>()(
@@ -19,6 +20,9 @@ const useCategoryStore = create<CategoryState>()(
     getAll: async () => {
       const categories = await categoriesService.getAll();
       return set(() => ({ data: categories }));
+    },
+    create: async (categoryName: string) => {
+      await categoriesService.create(categoryName);
     },
   }))
 );

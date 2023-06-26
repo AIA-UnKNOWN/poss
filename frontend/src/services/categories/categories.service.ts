@@ -17,6 +17,21 @@ const categoriesService = {
         .catch(error => reject(error));
     }
   ),
+  create: (categoryName: string) : Promise<Category> => new Promise(
+    (resolve, reject) => {
+      axios.post(
+        `${endpoint}`,
+        { name: categoryName },
+        {
+          headers: {
+            'Authorization': `Bearer ${getCookie('ut')}`,
+          },
+        }
+      )
+        .then(response => resolve(response.data))
+        .catch(error => reject(error));
+    }
+  ),
 }
 
 export default categoriesService;
