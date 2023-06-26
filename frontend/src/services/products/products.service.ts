@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie } from 'typescript-cookie';
 // Types
-import type { Product } from 'src/store/products';
+import type { Product } from "src/components/cards/Product/Product.types";
 
 const endpoint = `${import.meta.env.VITE_APP_API_URL}/products`;
 
