@@ -5,8 +5,6 @@ import { FaFileUpload } from 'react-icons/fa';
 import type { FileUploaderProps } from './FileUploader.types';
 // Hooks
 import useFileUploader from './FileUploader.hook';
-// Components
-import Button from '../Button';
 
 const FileUploader: React.FC<FileUploaderProps> = props => {
   const id = `aia-poss-file-input-${Math.random()}`;
@@ -14,7 +12,6 @@ const FileUploader: React.FC<FileUploaderProps> = props => {
     fileName,
     file,
     handleFileUpload,
-    removeUploadedFile,
   } = useFileUploader(props);
 
   return (
@@ -27,18 +24,9 @@ const FileUploader: React.FC<FileUploaderProps> = props => {
         hidden
       />
       {fileName && file ? (
-        <div className='uploaded-file-container'>
-          <Button
-            className='remove-file-button'
-            showText={false}
-            showLeftIcon={true}
-            iconName='xmark'
-            text='Remove image'
-            size='sm'
-            onClick={removeUploadedFile}
-          />
+        <label className='uploaded-file-container' htmlFor={id}>
           <img src={file} alt={fileName} />
-        </div>
+        </label>
       ) : (
         <label className='file-uploader' htmlFor={id}>
           <FaFileUpload id="file-upload-icon" />

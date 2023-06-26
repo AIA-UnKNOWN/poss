@@ -36,7 +36,6 @@ const useFileUploader = (props: FileUploaderProps) => {
     fileName,
     file,
     handleFileUpload,
-    removeUploadedFile,
   }
 }
 
