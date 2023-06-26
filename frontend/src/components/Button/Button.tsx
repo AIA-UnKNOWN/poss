@@ -1,13 +1,15 @@
 import './Button.style.scss';
 import React from 'react';
 // Icons
-import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus, FaXmark } from "react-icons/fa6";
 // Types
 import type { Button } from './Button.types';
 
 const Button: React.FC<Button> = props => {
   const {
     text,
+    className,
+    id,
     iconName,
     showLeftIcon = false,
     showText = true,
@@ -30,6 +32,9 @@ const Button: React.FC<Button> = props => {
       case 'plus':
         icon = <FaPlus />
         break;
+      case 'xmark':
+        icon = <FaXmark />
+        break;
       case 'none':
       default:
         icon = null;
@@ -45,7 +50,8 @@ const Button: React.FC<Button> = props => {
 
   return (
     <button
-      className={`primary-button button-${size}`}
+      id={id}
+      className={`primary-button button-${size} ${className}`}
       onClick={onClick}
     >
       {showLeftIcon && renderIcon()}

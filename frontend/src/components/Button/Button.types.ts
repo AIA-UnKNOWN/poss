@@ -1,9 +1,11 @@
-export type Icon = 'none' | 'angle-left' | 'angle-right' | 'minus' | 'plus';
+export type Icon = 'none' | 'angle-left' | 'angle-right' | 'minus' | 'plus' | 'xmark';
 
 export type Size = 'sm' | 'md';
 
 export interface Button {
   text: string;
+  className?: string;
+  id?: string;
   iconName?: Icon;
   showLeftIcon?: boolean;
   showText?: boolean;
