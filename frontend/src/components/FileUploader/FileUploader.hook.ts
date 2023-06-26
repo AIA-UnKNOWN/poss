@@ -35,6 +35,8 @@ const useFileUploader = (props: FileUploaderProps) => {
   const dropHandler = e => {
     // Prevent default behavior (Prevent file from being opened)
     e.preventDefault();
+
+    const files: FileList | File[] = [];
     if (e.dataTransfer.items) {
       // Use DataTransferItemList interface to access the file(s)
       [...e.dataTransfer.items].forEach((item, i) => {
@@ -42,6 +44,7 @@ const useFileUploader = (props: FileUploaderProps) => {
           const file = item.getAsFile();
           setFileName(file.name);
           setFile(URL.createObjectURL(file));
+          files.push(file);
         }
       });
     } else {
@@ -49,8 +52,11 @@ const useFileUploader = (props: FileUploaderProps) => {
       [...e.dataTransfer.files].forEach((file, i) => {
         setFileName(file.name);
         setFile(URL.createObjectURL(file));
+        files.push(file);
       });
     }
+
+    onChange?.(files);
   }
 
   const dragOverHandler = e => {
