@@ -33,7 +33,7 @@ const Product: React.FC<ProductProps> = props => {
             <div className='order-item-details'>
               <div className='product-image-container order-item'>
                 <img
-                  src={photoUrl || "/empty-image.jpg"}
+                  src={photoUrl ? `${import.meta.env.VITE_APP_API_URL}/${photoUrl}` : "/empty-image.jpg"}
                   alt={name || "No Image"}
                 />
               </div>
@@ -68,7 +68,7 @@ const Product: React.FC<ProductProps> = props => {
           <div className="product">
             <div className='product-image-container'>
               <img
-                src={photoUrl || "/empty-image.jpg"}
+                src={photoUrl ? `${import.meta.env.VITE_APP_API_URL}/${photoUrl}` : "/empty-image.jpg"}
                 alt={name || "No Image"}
               />
             </div>
