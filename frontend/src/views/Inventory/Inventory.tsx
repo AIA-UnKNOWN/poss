@@ -24,7 +24,7 @@ const Inventory = () => {
       case 'ADD_CATEGORY':
         return <AddCategory />;
       case 'ADD_PRODUCT':
-        return <AddProduct />;
+        return <AddProduct toggleModal={toggleModal} />;
     }
   }
 

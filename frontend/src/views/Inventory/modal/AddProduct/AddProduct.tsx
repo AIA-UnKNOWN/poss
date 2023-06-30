@@ -1,48 +1,55 @@
 import './AddProduct.styles.scss';
+import React from 'react';
+// Hooks
+import useAddProduct from './AddProduct.hook';
 // Components
 import Button from "src/components/Button/Button";
 import Input from "src/components/Input/Input";
 import TextArea from 'src/components/TextArea/TextArea';
 import FileUploader from 'src/components/FileUploader';
+// Types
+import { AddProductProps } from './AddProduct.types';
 
-const AddProduct = () => {
+const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
+  const {
+    handleSubmit,
+  } = useAddProduct({ toggleModal });
 
   return (
-    <div className='modal-content'>
+    <form className='modal-content' onSubmit={handleSubmit}>
       <p className='modal-title'>Add Product</p>
       <div className="multi-input-container">
         <Input
           placeholder="Product name"
-          onChange={e => console.log(e.target.value)}
+          name='name'
         />
         <Input
           placeholder="Category name"
-          onChange={e => console.log(e.target.value)}
+          name='categoryName'
         />
       </div>
       <div className="multi-input-container">
         <Input
           placeholder="Quantity"
           type='number'
-          onChange={e => console.log(e.target.value)}
+          name='quantity'
         />
         <Input
           placeholder="Price"
           type='number'
-          onChange={e => console.log(e.target.value)}
+          name='price'
         />
       </div>
       <TextArea
         placeholder='Description'
+        name='description'
       />
-      <FileUploader
-        onChange={files => console.log('FileUploader files', files)}
-      />
+      <FileUploader name='productImage' />
       <Button
         text="Add"
         onClick={() => console.log('add product')}
       />
-    </div>
+    </form>
   )
 }
 
