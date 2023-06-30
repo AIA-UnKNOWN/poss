@@ -14,6 +14,7 @@ import { PhotosModule } from './modules/photos/photos.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { RolesModule } from './modules/roles/roles.module';
+import { FilesModule } from './modules/files/files.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RolesModule } from './modules/roles/roles.module';
     OrdersModule,
     TransactionsModule,
     RolesModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
