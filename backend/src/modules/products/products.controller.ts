@@ -1,5 +1,7 @@
-import { Controller, Post, Body, UseGuards, Get, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, FileTypeValidator } from '@nestjs/common';
 import * as _ from 'lodash';
+import { Express } from 'express'
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
@@ -13,8 +15,21 @@ export class ProductsController {
   ) {}
 
   @Post()
-  create(@Body() product: ProductDto) {
-    return this.productsService.create(product);
+  @UseInterceptors(FileInterceptor('productImage', { dest: './uploads' }))
+  create(
+    @Body() product: ProductDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: 'image/*' }),
+        ],
+      }),
+    ) file?: Express.Multer.File
+  ) {
+    return this.productsService.create({
+      ...product,
+      photoUrl: file?.path || null,
+    });
   }
 
   @Get(':productId')
