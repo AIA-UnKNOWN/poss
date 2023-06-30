@@ -2,6 +2,7 @@ import { Controller, Post, Body, UseGuards, Get, Param, Delete, UseInterceptors,
 import * as _ from 'lodash';
 import { Express } from 'express'
 import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 import { ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
@@ -15,7 +16,17 @@ export class ProductsController {
   ) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('productImage', { dest: './uploads' }))
+  @UseInterceptors(
+    FileInterceptor('productImage', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const newFileName = `${Date.now()}-${file.originalname}`;
+          callback(null, newFileName);
+        },
+      }),
+    })
+  )
   create(
     @Body() product: ProductDto,
     @UploadedFile(
@@ -28,7 +39,7 @@ export class ProductsController {
   ) {
     return this.productsService.create({
       ...product,
-      photoUrl: file?.path || null,
+      photoUrl: file?.filename || null,
     });
   }
 

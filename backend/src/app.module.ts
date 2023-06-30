@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { join } from 'path';
 // Controllers
 import { AppController } from './app.controller';
 // Services
@@ -14,11 +15,14 @@ import { PhotosModule } from './modules/photos/photos.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { RolesModule } from './modules/roles/roles.module';
-import { FilesModule } from './modules/files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
     DatabaseModule,
     UsersModule,
     AuthModule,
@@ -28,7 +32,6 @@ import { FilesModule } from './modules/files/files.module';
     OrdersModule,
     TransactionsModule,
     RolesModule,
-    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
