@@ -40,6 +40,7 @@ const FileUploader: React.FC<FileUploaderProps> = props => {
         id={id}
         type="file"
         accept='image/*'
+        name={props.name}
         onChange={e => handleFileUpload(e.target.files)}
         hidden
       />
