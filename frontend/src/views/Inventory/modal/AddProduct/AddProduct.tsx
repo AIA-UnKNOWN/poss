@@ -12,6 +12,7 @@ import { AddProductProps } from './AddProduct.types';
 
 const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
   const {
+    setFiles,
     handleSubmit,
   } = useAddProduct({ toggleModal });
 
@@ -44,7 +45,10 @@ const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
         placeholder='Description'
         name='description'
       />
-      <FileUploader name='productImage' />
+      <FileUploader
+        name='productImage'
+        onChange={files => setFiles(files)}
+      />
       <Button
         text="Add"
         onClick={() => console.log('add product')}
