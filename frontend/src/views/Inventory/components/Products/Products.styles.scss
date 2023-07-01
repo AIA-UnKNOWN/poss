@@ -1,14 +1,12 @@
 @use 'src/views/Inventory/Inventory.style' as inventoryStyles;
 
 .inventory-products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: inventoryStyles.$gap;
-  height: 100%;
+  column-width: 200px;
+  column-gap: inventoryStyles.$gap;
 
   .product {
-    flex: 1;
-    min-width: 200px;
+    max-width: 100%;
+    break-inside: avoid;
+    margin-bottom: inventoryStyles.$gap;
   }
 }
