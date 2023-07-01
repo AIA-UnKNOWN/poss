@@ -9,18 +9,20 @@ import useProducts from './Products.hook';
 const Products = () => {
   const { products } = useProducts();
 
+  if (products.length === 0) return (
+    <EmptyState
+      text='No products available.'
+    />
+  );
+
   return (
     <div className="inventory-products">
-      {products.length > 0 ? products.map(product => (
+      {products.map(product => (
         <Product
           key={product.id}
           product={product}
         />
-      )) : (
-        <EmptyState
-          text='No products available.'
-        />
-      )}
+      ))}
     </div>
   )
 }
