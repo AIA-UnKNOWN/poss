@@ -20,10 +20,11 @@ const Product: React.FC<ProductProps> = props => {
   const {
     // States
     productQuantity,
+    imageUrl,
     // Functions
     incrementQuantity,
     decrementQuantity,
-  } = useProduct({ quantity, onIncrement, onDecrement });
+  } = useProduct({ photoUrl, quantity, onIncrement, onDecrement });
 
   const renderProduct = () : JSX.Element => {
     switch(view) {
@@ -33,7 +34,7 @@ const Product: React.FC<ProductProps> = props => {
             <div className='order-item-details'>
               <div className='product-image-container order-item'>
                 <img
-                  src={photoUrl ? `${import.meta.env.VITE_APP_API_URL}/${photoUrl}` : "/empty-image.jpg"}
+                  src={imageUrl}
                   alt={name || "No Image"}
                 />
               </div>
@@ -68,7 +69,7 @@ const Product: React.FC<ProductProps> = props => {
           <div className="product">
             <div className='product-image-container'>
               <img
-                src={photoUrl ? `${import.meta.env.VITE_APP_API_URL}/${photoUrl}` : "/empty-image.jpg"}
+                src={imageUrl}
                 alt={name || "No Image"}
               />
             </div>

@@ -21,4 +21,5 @@ export interface ProductProps extends QuantityControllers {
 
 export interface ProductHook extends QuantityControllers {
   quantity: number;
+  photoUrl?: string;
 }
