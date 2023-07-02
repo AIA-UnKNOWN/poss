@@ -78,6 +78,22 @@
     }
   }
 
+  .product-details-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+
+    .product-details {
+      align-items: baseline;
+
+      .product-name {
+        text-align: left;
+      }
+    }
+  }
+
   .order-item-quantity-control {
     display: flex;
     align-items: center;

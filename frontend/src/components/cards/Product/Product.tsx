@@ -73,9 +73,17 @@ const Product: React.FC<ProductProps> = props => {
                 alt={name || "No Image"}
               />
             </div>
-            <div className='product-details'>
-              <span className='product-name'>{name}</span>
-              <span className='product-price'>${price}</span>
+            <div className='product-details-container'>
+              <div className='product-details'>
+                <span className='product-name'>{name}</span>
+                <span className='product-price'>${price}</span>
+              </div>
+              <Button
+                text='Add to cart'
+                showText={false}
+                showLeftIcon={true}
+                iconName='cart-shopping'
+              />
             </div>
           </div>
         );
