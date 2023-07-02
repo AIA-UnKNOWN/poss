@@ -1,4 +1,4 @@
-export type Icon = 'none' | 'angle-left' | 'angle-right' | 'minus' | 'plus' | 'xmark';
+export type Icon = 'none' | 'angle-left' | 'angle-right' | 'minus' | 'plus' | 'xmark' | 'cart-shopping';
 
 export type Size = 'sm' | 'md';
 

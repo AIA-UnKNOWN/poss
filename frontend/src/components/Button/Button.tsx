@@ -1,7 +1,7 @@
 import './Button.style.scss';
 import React from 'react';
 // Icons
-import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus, FaXmark } from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus, FaXmark, FaCartShopping } from "react-icons/fa6";
 // Types
 import type { Button } from './Button.types';
 
@@ -34,6 +34,9 @@ const Button: React.FC<Button> = props => {
         break;
       case 'xmark':
         icon = <FaXmark />
+        break;
+      case 'cart-shopping':
+        icon = <FaCartShopping />
         break;
       case 'none':
       default:
