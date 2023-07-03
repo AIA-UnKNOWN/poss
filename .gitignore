@@ -42,3 +42,5 @@ backend/.nyc_output
 
 # Env
 backend/.env
+
+backend/uploads
