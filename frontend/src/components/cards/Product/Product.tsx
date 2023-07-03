@@ -3,8 +3,8 @@ import React from "react";
 import type { ProductProps } from "./Product.types";
 import Button from '../../Button/Button';
 import useProduct from './Product.hook';
-// Utils
-import { addOrderCartItem } from 'src/utils/orderCart.helper';
+// Store
+import useProductStore from 'src/store/products';
 
 const Product: React.FC<ProductProps> = props => {
   const {
@@ -19,6 +19,7 @@ const Product: React.FC<ProductProps> = props => {
     photoUrl,
     quantity,
   } = product;
+  const productStore = useProductStore();
   const {
     // States
     productQuantity,
@@ -85,7 +86,7 @@ const Product: React.FC<ProductProps> = props => {
                 showText={false}
                 showLeftIcon={true}
                 iconName='cart-shopping'
-                onClick={() => addOrderCartItem(product)}
+                onClick={() => productStore.addOrderCartItem(product)}
               />
             </div>
           </div>

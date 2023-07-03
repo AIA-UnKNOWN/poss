@@ -16,13 +16,7 @@ const getOrderCartItems = () : Product[] => {
 const addOrderCartItem = (product: Product) => {
   let items = getOrderCartItems();
   const isItemExist = checkIfItemExist(product, items);
-  if (!isItemExist) {
-    items.push(product);
-    // Triggers change event on 'localStorage'
-    const event = new Event('storageChange');
-    event.newProduct = product;
-    window.dispatchEvent(event);
-  };
+  if (!isItemExist) items.push(product);
   localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(items));
 }
 

@@ -1,33 +1,14 @@
-import { useEffect, useState } from "react";
 import { removeCookie } from "typescript-cookie";
-
+// Store
 import useNavigationStore, { PageName } from "src/store/navigation"
+import useProductStore from "src/store/products";
 // Types
 import { NavigationBarProps } from "../NavigationBar/NavigationBar.types";
 import { OrderDetailsBarProps } from "../OrderDetailsBar/OrderDetailsBar.types";
-import { Product } from "src/components/cards/Product/Product.types";
-// Utils
-import { getOrderCartItems } from "src/utils/orderCart.helper";
 
 const useFullLayout = () => {
   const { navigateToPage } = useNavigationStore();
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const products = getOrderCartItems();
-    setProducts(products);
-    
-    window.addEventListener('storageChange', updateOderCartItems);
-    return () => {
-      window.removeEventListener('storageChange', updateOderCartItems);
-    }
-  }, []);
-
-  const updateOderCartItems = e => {
-    const products = getOrderCartItems();
-    const newlyAddedProduct = e.newProduct; // e.newProduct => src/utils/orderCart.helper,addOrderCartItem
-    setProducts([...products, newlyAddedProduct]);
-  }
+  const productStore = useProductStore();
   
   const logout = () => {
     removeCookie('ut');
@@ -63,7 +44,7 @@ const useFullLayout = () => {
     ],
   }
   const orderDetailsBar: OrderDetailsBarProps = {
-    products,
+    products: productStore.orderCartItems,
   }
 
   return {
