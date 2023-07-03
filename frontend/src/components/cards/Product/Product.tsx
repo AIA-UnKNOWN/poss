@@ -3,6 +3,8 @@ import React from "react";
 import type { ProductProps } from "./Product.types";
 import Button from '../../Button/Button';
 import useProduct from './Product.hook';
+// Utils
+import { addOrderCartItem } from 'src/utils/orderCart.helper';
 
 const Product: React.FC<ProductProps> = props => {
   const {
@@ -83,6 +85,7 @@ const Product: React.FC<ProductProps> = props => {
                 showText={false}
                 showLeftIcon={true}
                 iconName='cart-shopping'
+                onClick={() => addOrderCartItem(product)}
               />
             </div>
           </div>
