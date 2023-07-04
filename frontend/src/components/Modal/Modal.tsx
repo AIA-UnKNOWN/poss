@@ -14,6 +14,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     padding: '0',
     borderRadius: '10px',
+    maxHeight: '100vh',
   },
   overlay: {
     background: 'rgba(105, 105, 105, 0.3)',
@@ -32,10 +33,13 @@ const Modal: React.FC<Modal> = ({ isOpen, onCloseModal, children }) => {
   }
 
   const afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
+    // Disables underneath page scrolling
+    document.body.style.overflowY = 'hidden';
   }
 
   const closeModal = () => {
+    // Enables underneath page scrolling
+    document.body.style.overflowY = 'visible';
     setIsModalOpen(false);
     // Use this one if you want to sync the modal state and your component state.
     // Possible issue found if not synced => You'll have to double click sometimes to toggle the modal
