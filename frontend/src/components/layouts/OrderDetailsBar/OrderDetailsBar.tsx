@@ -9,6 +9,10 @@ import SalesInfo from 'src/components/cards/SalesInfo/SalesInfo';
 
 const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
   const { products } = props;
+  const subtotal = products.reduce(
+    (initialAmount, product) => initialAmount + (product.price * product.quantity),
+    0
+  );
 
   return (
     <div className='order-details-bar'>
@@ -26,7 +30,7 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
       </div>
       <div className='order-amount-info'>
         <div className='sales-info-container'>
-          <SalesInfo subTotal={150} />
+          <SalesInfo subTotal={subtotal} />
         </div>
         <Button
           text='Checkout'
