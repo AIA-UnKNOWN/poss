@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { removeCookie } from "typescript-cookie";
 // Store
 import useNavigationStore, { PageName } from "src/store/navigation"
@@ -5,10 +6,16 @@ import useProductStore from "src/store/products";
 // Types
 import { NavigationBarProps } from "../NavigationBar/NavigationBar.types";
 import { OrderDetailsBarProps } from "../OrderDetailsBar/OrderDetailsBar.types";
+// Utils
+import { getOrderCartItems } from "src/utils/orderCart.helper";
 
 const useFullLayout = () => {
   const { navigateToPage } = useNavigationStore();
   const productStore = useProductStore();
+
+  useEffect(() => {
+    productStore.setOrderCartItems(getOrderCartItems());
+  }, []);
   
   const logout = () => {
     removeCookie('ut');

@@ -1,5 +1,4 @@
 import './Product.style.scss';
-import React from "react";
 import type { ProductProps } from "./Product.types";
 import Button from '../../Button/Button';
 import useProduct from './Product.hook';

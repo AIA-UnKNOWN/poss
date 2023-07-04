@@ -16,7 +16,14 @@ const getOrderCartItems = () : Product[] => {
 const addOrderCartItem = (product: Product) => {
   let items = getOrderCartItems();
   const isItemExist = checkIfItemExist(product, items);
-  if (!isItemExist) items.push(product);
+  if (!isItemExist) {
+    items.push(product);
+  } else {
+    items = items.map(item => {
+      if (item.id !== product.id) return item;
+      return { ...item, quantity: item.quantity + 1 };
+    });
+  }
   localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(items));
 }
 

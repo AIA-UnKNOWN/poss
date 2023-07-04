@@ -8,12 +8,16 @@ const useProduct = ({
   onIncrement,
   onDecrement,
 }: ProductHook) => {
-  const [productQuantity, setProductQuantity] = useState<number>(quantity || 0);
+  const [productQuantity, setProductQuantity] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState('/empty-image.jpg');
 
   useEffect(() => {
     fetchImage();
   }, []);
+
+  useEffect(() => {
+    setProductQuantity(quantity);
+  }, [quantity]);
 
   const incrementQuantity = () => {
     setProductQuantity(prevProductQuantity => {
