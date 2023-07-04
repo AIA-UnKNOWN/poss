@@ -45,4 +45,9 @@ export class ProductsService {
     return this.productsRepository.delete(productId);
   }
 
+  async update(productData: Product) {
+    if (_.isEmpty(productData)) throw new BadRequestException("Failed to update product due to empty payload");
+    await this.productsRepository.save(productData);
+  }
+
 }
