@@ -48,16 +48,6 @@ const useProductStore = create<ProductState>()(
       });
     },
     incrementCartItemQuantity: async (productId: number) => {
-      // return set(state => {
-      //   const modifiedOrderCartItems = state.orderCartItems.map(orderCartItem => {
-      //     if (orderCartItem.id !== productId) return orderCartItem;
-      //     orderCartItem.quantity++;
-      //     return orderCartItem;
-      //   });
-      //   localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(modifiedOrderCartItems));
-      //   return { orderCartItems: modifiedOrderCartItems };
-      // });
-
       const products = await productsService.getAll();
       const wantedProductIndex = products.findIndex(p => p.id === productId);
       if (wantedProductIndex === -1) return;
@@ -67,18 +57,15 @@ const useProductStore = create<ProductState>()(
       await productsService.update(wantedProduct);
       return set(() => ({ orderCartItems: products }));
     },
-    decrementCartItemQuantity: (productId: number) => {
-      return set(state => {
-        const modifiedOrderCartItems = state.orderCartItems.map(orderCartItem => {
-          if (orderCartItem.id !== productId) return orderCartItem;
-          if (orderCartItem.quantity > 0) {
-            orderCartItem.quantity--;
-          }
-          return orderCartItem;
-        });
-        localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(modifiedOrderCartItems));
-        return { orderCartItems: modifiedOrderCartItems };
-      });
+    decrementCartItemQuantity: async (productId: number) => {
+      const products = await productsService.getAll();
+      const wantedProductIndex = products.findIndex(p => p.id === productId);
+      if (wantedProductIndex === -1) return;
+      const wantedProduct = products[wantedProductIndex];
+      if (wantedProduct.quantity > 0) wantedProduct.quantity--;
+      localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(products));
+      await productsService.update(wantedProduct);
+      return set(() => ({ orderCartItems: products }));
     },
   }))
 );
