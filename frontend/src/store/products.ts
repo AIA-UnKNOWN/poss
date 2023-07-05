@@ -40,7 +40,6 @@ const useProductStore = create<ProductState>()(
         const orderCartItem = _.find(orderCartItems, { id: product.id });
         if (orderCartItem) {
           orderCartItem.quantity += 1;
-          productsService.update(orderCartItem);
         } else {
           addOrderCartItem(product);
           orderCartItems.push(product);
@@ -55,7 +54,6 @@ const useProductStore = create<ProductState>()(
         const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
         if (updatedCartItem) {
           updatedCartItem.quantity += 1;
-          productsService.update(updatedCartItem);
           localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
         }
         return { orderCartItems: updatedOrderCartItems };
@@ -67,7 +65,6 @@ const useProductStore = create<ProductState>()(
         const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
         if (updatedCartItem && updatedCartItem.quantity > 0) {
           updatedCartItem.quantity -= 1;
-          productsService.update(updatedCartItem);
           localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
         }
         return { orderCartItems: updatedOrderCartItems };
