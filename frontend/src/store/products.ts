@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools } from 'zustand/middleware';
+import _ from 'lodash';
 // Services
 import productsService from "src/services/products/products.service";
 // Types
@@ -47,25 +48,29 @@ const useProductStore = create<ProductState>()(
         };
       });
     },
-    incrementCartItemQuantity: async (productId: number) => {
-      const products = await productsService.getAll();
-      const wantedProductIndex = products.findIndex(p => p.id === productId);
-      if (wantedProductIndex === -1) return;
-      const wantedProduct = products[wantedProductIndex];
-      wantedProduct.quantity++;
-      localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(products));
-      await productsService.update(wantedProduct);
-      return set(() => ({ orderCartItems: products }));
+    incrementCartItemQuantity: (productId: number) => {
+      return set((state) => {
+        const updatedOrderCartItems = _.cloneDeep(state.orderCartItems);
+        const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
+        if (updatedCartItem) {
+          updatedCartItem.quantity += 1;
+          productsService.update(updatedCartItem);
+          localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
+        }
+        return { orderCartItems: updatedOrderCartItems };
+      });
     },
-    decrementCartItemQuantity: async (productId: number) => {
-      const products = await productsService.getAll();
-      const wantedProductIndex = products.findIndex(p => p.id === productId);
-      if (wantedProductIndex === -1) return;
-      const wantedProduct = products[wantedProductIndex];
-      if (wantedProduct.quantity > 0) wantedProduct.quantity--;
-      localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(products));
-      await productsService.update(wantedProduct);
-      return set(() => ({ orderCartItems: products }));
+    decrementCartItemQuantity: (productId: number) => {
+      return set((state) => {
+        const updatedOrderCartItems = _.cloneDeep(state.orderCartItems);
+        const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
+        if (updatedCartItem && updatedCartItem.quantity > 0) {
+          updatedCartItem.quantity -= 1;
+          productsService.update(updatedCartItem);
+          localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
+        }
+        return { orderCartItems: updatedOrderCartItems };
+      });
     },
   }))
 );
