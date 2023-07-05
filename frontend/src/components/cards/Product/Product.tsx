@@ -23,9 +23,6 @@ const Product: React.FC<ProductProps> = props => {
     // States
     productQuantity,
     imageUrl,
-    // Functions
-    incrementQuantity,
-    decrementQuantity,
   } = useProduct({ photoUrl, quantity, onIncrement, onDecrement });
 
   const renderProduct = () : JSX.Element => {
@@ -52,7 +49,7 @@ const Product: React.FC<ProductProps> = props => {
                 showLeftIcon={true}
                 iconName='minus'
                 size='sm'
-                onClick={decrementQuantity}
+                onClick={() => productStore.decrementCartItemQuantity(product.id)}
               />
               <span className='product-quantity'>{productQuantity}</span>
               <Button
@@ -61,7 +58,7 @@ const Product: React.FC<ProductProps> = props => {
                 showLeftIcon={true}
                 iconName='plus'
                 size='sm'
-                onClick={incrementQuantity}
+                onClick={() => productStore.incrementCartItemQuantity(product.id)}
               />
             </div>
           </div>

@@ -5,7 +5,7 @@ import productsService from "src/services/products/products.service";
 // Types
 import type { Product } from "src/components/cards/Product/Product.types";
 // Utisl
-import { addOrderCartItem } from "src/utils/orderCart.helper";
+import { ORDER_CART_ITEMS_KEY, addOrderCartItem } from "src/utils/orderCart.helper";
 
 export type ProductState = {
   data: Product[],
@@ -14,6 +14,8 @@ export type ProductState = {
   create: (product: Product) => Promise<Product>,
   setOrderCartItems: (products: Product[]) => void,
   addOrderCartItem: (product: Product) => void,
+  incrementCartItemQuantity: (productId: number) => void,
+  decrementCartItemQuantity: (productId: number) => void,
 }
 
 const useProductStore = create<ProductState>()(
@@ -44,7 +46,40 @@ const useProductStore = create<ProductState>()(
             : [...state.orderCartItems, product],
         };
       });
-    }
+    },
+    incrementCartItemQuantity: async (productId: number) => {
+      // return set(state => {
+      //   const modifiedOrderCartItems = state.orderCartItems.map(orderCartItem => {
+      //     if (orderCartItem.id !== productId) return orderCartItem;
+      //     orderCartItem.quantity++;
+      //     return orderCartItem;
+      //   });
+      //   localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(modifiedOrderCartItems));
+      //   return { orderCartItems: modifiedOrderCartItems };
+      // });
+
+      const products = await productsService.getAll();
+      const wantedProductIndex = products.findIndex(p => p.id === productId);
+      if (wantedProductIndex === -1) return;
+      const wantedProduct = products[wantedProductIndex];
+      wantedProduct.quantity++;
+      localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(products));
+      await productsService.update(wantedProduct);
+      return set(() => ({ orderCartItems: products }));
+    },
+    decrementCartItemQuantity: (productId: number) => {
+      return set(state => {
+        const modifiedOrderCartItems = state.orderCartItems.map(orderCartItem => {
+          if (orderCartItem.id !== productId) return orderCartItem;
+          if (orderCartItem.quantity > 0) {
+            orderCartItem.quantity--;
+          }
+          return orderCartItem;
+        });
+        localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(modifiedOrderCartItems));
+        return { orderCartItems: modifiedOrderCartItems };
+      });
+    },
   }))
 );
 

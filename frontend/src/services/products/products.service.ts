@@ -32,6 +32,21 @@ const productsService = {
         .catch(error => reject(error));
     }
   ),
+  update: (productData: Product) : Promise<void> => new Promise(
+    (resolve, reject) => {
+      axios.put(
+        `${endpoint}`,
+        productData,
+        {
+          headers: {
+            'Authorization': `Bearer ${getCookie('ut')}`,
+          }
+        }
+      )
+        .then(response => resolve(response.data))
+        .catch(error => reject(error));
+    }
+  ),
 }
 
 export default productsService;
