@@ -35,17 +35,18 @@ const useProductStore = create<ProductState>()(
       return set(() => ({ orderCartItems: products }));
     },
     addOrderCartItem: (product: Product) => {
-      addOrderCartItem(product);
-      return set(state => {
-        const productFound = state.orderCartItems.find(orderCartItem => orderCartItem.id === product.id);
-        return {
-          orderCartItems: productFound
-            ? state.orderCartItems.map(orderCartItem => {
-              if (orderCartItem.id !== product.id) return orderCartItem;
-              return { ...orderCartItem, quantity: orderCartItem.quantity + 1 };
-            })
-            : [...state.orderCartItems, product],
-        };
+      return set((state) => {
+        const orderCartItems = _.cloneDeep(state.orderCartItems);
+        const orderCartItem = _.find(orderCartItems, { id: product.id });
+        if (orderCartItem) {
+          orderCartItem.quantity += 1;
+          productsService.update(orderCartItem);
+        } else {
+          addOrderCartItem(product);
+          orderCartItems.push(product);
+        }
+        localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(orderCartItems));
+        return { orderCartItems: orderCartItems };
       });
     },
     incrementCartItemQuantity: (productId: number) => {
