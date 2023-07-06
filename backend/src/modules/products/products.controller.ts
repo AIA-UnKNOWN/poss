@@ -35,8 +35,10 @@ export class ProductsController {
         validators: [
           new FileTypeValidator({ fileType: 'image/*' }),
         ],
+        fileIsRequired: false
       }),
-    ) file?: Express.Multer.File
+    )
+    file?: Express.Multer.File
   ) {
     return this.productsService.create({
       ...product,

@@ -20,11 +20,31 @@ $gap: 15px;
     display: flex;
     gap: $gap;
 
-    .input-container {
+    .input-wrapper {
       width: 50%;
+    }
+
+    .input-container {
+      width: 100%;
 
       input {
         width: 100%;
+      }
+    }
+  }
+
+  .input-wrapper {
+    
+    .input-error-message {
+      color: globalVariables.$red;
+      font-family: globalVariables.$font-family;
+      font-size: globalVariables.$small-2-text;
+      margin-left: 5px;
+      margin-top: 5px;
+      display: inline-block;
+
+      &:first-letter {
+        text-transform: uppercase;
       }
     }
   }

@@ -12,6 +12,7 @@ import { AddProductProps } from './AddProduct.types';
 
 const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
   const {
+    formError,
     setFiles,
     handleSubmit,
   } = useAddProduct({ toggleModal });
@@ -20,31 +21,50 @@ const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
     <form className='modal-content' onSubmit={handleSubmit}>
       <p className='modal-title'>Add Product</p>
       <div className="multi-input-container">
-        <Input
-          placeholder="Product name"
-          name='name'
-        />
-        <Input
-          placeholder="Category name"
-          name='categoryName'
-        />
+        <div className='input-wrapper'>
+          <Input
+            placeholder="Product name"
+            name='name'
+          />
+          {formError.name && (
+            <span className='input-error-message'>{formError.name}</span>
+          )}
+        </div>
+        <div className='input-wrapper'>
+          <Input
+            placeholder="Category name"
+            name='categoryName'
+          />
+        </div>
       </div>
       <div className="multi-input-container">
-        <Input
-          placeholder="Quantity"
-          type='number'
-          name='quantity'
-        />
-        <Input
-          placeholder="Price"
-          type='number'
-          name='price'
+        <div className="input-wrapper">
+          <Input
+            placeholder="Quantity"
+            type='number'
+            name='quantity'
+          />
+          {formError.quantity && (
+            <span className='input-error-message'>{formError.quantity}</span>
+          )}
+        </div>
+        <div className="input-wrapper">
+          <Input
+            placeholder="Price"
+            type='number'
+            name='price'
+          />
+          {formError.price && (
+            <span className='input-error-message'>{formError.price}</span>
+          )}
+        </div>
+      </div>
+      <div className="input-wrapper">
+        <TextArea
+          placeholder='Description'
+          name='description'
         />
       </div>
-      <TextArea
-        placeholder='Description'
-        name='description'
-      />
       <FileUploader
         onChange={files => setFiles(files)}
       />
