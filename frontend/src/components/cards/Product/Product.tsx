@@ -75,7 +75,10 @@ const Product: React.FC<ProductProps> = props => {
             <div className='product-details-container'>
               <div className='product-details'>
                 <span className='product-name'>{name}</span>
-                <span className='product-price'>${price}</span>
+                <div className='product-price_and_quantity'>
+                  <span className='product-price'>${price}</span>
+                  <span className='product-quantity'>({quantity})</span>
+                </div>
               </div>
               <Button
                 text='Add to cart'
