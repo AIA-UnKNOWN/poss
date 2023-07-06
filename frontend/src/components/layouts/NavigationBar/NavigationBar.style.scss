@@ -61,6 +61,11 @@
           background-color: globalVariables.$primary-color;
           color: globalVariables.$white;
         }
+
+        &.active {
+          color: globalVariables.$white;
+          background-color: globalVariables.$primary-color;;
+        }
       }
     }
   }

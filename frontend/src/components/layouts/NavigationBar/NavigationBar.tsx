@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavigationBar.style.scss';
 import { NavigationBarProps } from './NavigationBar.types';
+import useNavigationStore from 'src/store/navigation';
 
 
 const NavigationBar: React.FC<NavigationBarProps> = props =>  {
@@ -10,6 +11,7 @@ const NavigationBar: React.FC<NavigationBarProps> = props =>  {
     upperNav,
     lowerNav,
   } = props;
+  const navigationStore = useNavigationStore();
 
   return (
     <div className="navigation-bar">
@@ -35,7 +37,7 @@ const NavigationBar: React.FC<NavigationBarProps> = props =>  {
           {upperNav?.map(nav => (
             <li
               key={nav.label}
-              className='nav'
+              className={`nav ${nav.label === navigationStore.pageName && 'active'}`}
               onClick={() => nav.onClick?.(nav.label)}
             >
               <span>
