@@ -30,6 +30,11 @@
       flex: 1;
       overflow-y: auto;
     }
+
+    .order-cart-items-empty-state {
+      height: 100%;
+      background-color: globalVariables.$white-2;
+    }
   }
 
   .order-amount-info {
