@@ -41,8 +41,8 @@ const useProductStore = create<ProductState>()(
         if (orderCartItem) {
           orderCartItem.quantity += 1;
         } else {
-          addOrderCartItem(product);
-          orderCartItems.push(product);
+          addOrderCartItem({ ...product, quantity: 1 });
+          orderCartItems.push({ ...product, quantity: 1 });
         }
         localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(orderCartItems));
         return { orderCartItems: orderCartItems };
