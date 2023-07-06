@@ -46,7 +46,6 @@ const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
         name='description'
       />
       <FileUploader
-        name='productImage'
         onChange={files => setFiles(files)}
       />
       <Button
