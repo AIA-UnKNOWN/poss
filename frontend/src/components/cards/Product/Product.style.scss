@@ -73,13 +73,13 @@
       }
     }
 
+    .product-price {
+      font-weight: 700;
+    }
+
     .product-price_and_quantity {
       display: flex;
       align-items: center;
-
-      .product-price {
-        font-weight: 700;
-      }
   
       .product-quantity {
         color: globalVariables.$black;
