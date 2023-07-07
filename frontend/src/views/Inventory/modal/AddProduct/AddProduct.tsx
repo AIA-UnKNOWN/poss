@@ -7,12 +7,15 @@ import Button from "src/components/Button/Button";
 import Input from "src/components/Input/Input";
 import TextArea from 'src/components/TextArea/TextArea';
 import FileUploader from 'src/components/FileUploader';
+import Dropdown from 'src/components/Dropdown';
 // Types
 import { AddProductProps } from './AddProduct.types';
 
 const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
   const {
+    categories,
     formError,
+    setCategory,
     setFiles,
     handleSubmit,
   } = useAddProduct({ toggleModal });
@@ -31,9 +34,10 @@ const AddProduct: React.FC<AddProductProps> = ({ toggleModal }) => {
           )}
         </div>
         <div className='input-wrapper'>
-          <Input
-            placeholder="Category name"
-            name='categoryName'
+          <Dropdown
+            options={categories}
+            placeholder='Category'
+            onChange={selectedCategory => setCategory(selectedCategory)}
           />
         </div>
       </div>
