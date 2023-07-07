@@ -1,0 +1,58 @@
+@use 'src/variables' as globalVariables;
+
+.poss-dropdown {
+  font-family: globalVariables.$font-family;
+  font-size: globalVariables.$small-2-text;
+}
+
+.poss-dropdown-control {
+  border: none;
+  border-radius: globalVariables.$standard-border-radius-md;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.poss-dropdown-menu {
+  margin-top: 5px;
+  border-radius: globalVariables.$standard-border-radius-md;
+  overflow: hidden;
+  border: none;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: globalVariables.$standard-border-radius-md;
+    background: globalVariables.$primary-color;
+  }
+
+  .Dropdown-option {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: globalVariables.$black;
+
+    &:hover {
+      background-color: globalVariables.$primary-color;
+      color: globalVariables.$white;
+    }
+
+    &.is-selected {
+      background-color: globalVariables.$primary-color;
+      color: globalVariables.$white;
+    }
+  }
+
+  .Dropdown-noresults {
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.poss-dropdown-placeholder {
+  color: globalVariables.$black;
+}
