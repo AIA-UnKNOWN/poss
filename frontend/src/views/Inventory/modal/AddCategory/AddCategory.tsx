@@ -10,13 +10,20 @@ const AddCategory = () => {
   const categoryStore = useCategoryStore();
   const [categoryName, setCategoryName] = useState('');
   const [addButtonText, setAddButtonText] = useState('Add');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const addCategory = async (categoryName: string) => {
     setAddButtonText('Adding...');
-    await categoryStore.create(categoryName);
-    setCategoryName('');
-    setAddButtonText('Added!');
-    categoryStore.getAll();
+    try {
+      setErrorMessage('');
+      await categoryStore.create(categoryName);
+      setCategoryName('');
+      categoryStore.getAll();
+      setAddButtonText('Added!');
+    } catch(error) {
+      setErrorMessage(error.response.data.message);
+      setAddButtonText('Add');
+    }
   }
 
   const categoryNameChangeHandler = (value: string) => {
@@ -27,11 +34,16 @@ const AddCategory = () => {
   return (
     <div className='modal-content'>
       <p className='modal-title'>Add Category</p>
-      <Input
-        placeholder="Category name"
-        value={categoryName}
-        onChange={e => categoryNameChangeHandler(e.target.value)}
-      />
+      <div>
+        <Input
+          placeholder="Category name"
+          value={categoryName}
+          onChange={e => categoryNameChangeHandler(e.target.value)}
+        />
+        {errorMessage && (
+          <span className='input-error-message'>{errorMessage}</span>
+        )}
+      </div>
       <Button
         text={addButtonText}
         onClick={() => addCategory(categoryName)}
