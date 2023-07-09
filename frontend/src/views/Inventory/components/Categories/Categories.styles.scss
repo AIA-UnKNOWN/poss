@@ -19,5 +19,10 @@
       background-color: globalVariables.$primary-color;
       color: globalVariables.$white;
     }
+
+    &.selected {
+      background-color: globalVariables.$primary-color;
+      color: globalVariables.$white;
+    }
   }
 }
