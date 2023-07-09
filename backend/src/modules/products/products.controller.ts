@@ -1,9 +1,9 @@
-import { Controller, Post, Body, UseGuards, Get, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, FileTypeValidator, Put } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, FileTypeValidator, Put, Query } from '@nestjs/common';
 import * as _ from 'lodash';
 import { Express } from 'express'
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ProductDto } from './products.dto';
+import { FindAllFilter, ProductDto } from './products.dto';
 import { ProductsService } from './products.service';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
 import { Product } from './entity/product.entity';
@@ -52,8 +52,8 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query() filter?: FindAllFilter) {
+    return this.productsService.findAll(filter);
   }
 
   @Put()

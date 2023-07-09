@@ -27,3 +27,16 @@ export class ProductDto {
   @IsOptional()
   category?: Category;
 }
+
+export class FindAllFilter {
+
+  @IsOptional()
+  name?: string;
+
+  @IsOptional()
+  code?: string;
+
+  @IsOptional()
+  categoryId?: number;
+
+}

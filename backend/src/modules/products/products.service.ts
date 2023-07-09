@@ -1,9 +1,9 @@
 import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 import * as _ from 'lodash';
 import { Product } from './entity/product.entity';
 import { PRODUCT_REPOSITORY } from './products.provider';
-import { ProductDto } from './products.dto';
+import { FindAllFilter, ProductDto } from './products.dto';
 import { CATEGORY_REPOSITORY } from 'src/modules/categories/categories.provider';
 import { Category } from 'src/modules/categories/entity/category.entity';
 
@@ -37,8 +37,14 @@ export class ProductsService {
     return this.productsRepository.save(product);
   }
 
-  findAll(): Promise<Product[]> {
-    return this.productsRepository.find();
+  findAll(filter?: FindAllFilter): Promise<Product[]> {
+    return this.productsRepository.find({
+      where: {
+        category: filter.categoryId ? {
+          id: filter.categoryId
+        } : undefined,
+      }
+    });
   }
 
   remove(productId: number): Promise<DeleteResult> {
