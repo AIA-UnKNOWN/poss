@@ -9,9 +9,10 @@ import type { Product } from "src/components/cards/Product/Product.types";
 import { ORDER_CART_ITEMS_KEY, addOrderCartItem } from "src/utils/orderCart.helper";
 
 export type ProductState = {
+  isLoading: boolean,
   data: Product[],
   orderCartItems: Product[],
-  getAll: () => Promise<void>,
+  getAll: (filter?: GetAllFilter) => Promise<void>,
   create: (product: Product) => Promise<Product>,
   setOrderCartItems: (products: Product[]) => void,
   addOrderCartItem: (product: Product) => void,
@@ -19,13 +20,21 @@ export type ProductState = {
   decrementCartItemQuantity: (productId: number) => void,
 }
 
+export type GetAllFilter = {
+  name?: string;
+  code?: string;
+  categoryId?: number;
+}
+
 const useProductStore = create<ProductState>()(
   devtools(set => ({
+    isLoading: false,
     data: [],
     orderCartItems: [],
-    getAll: async () => {
-      const products = await productsService.getAll();
-      return set(() => ({ data: products }));
+    getAll: async (filter?: GetAllFilter) => {
+      set(() => ({ isLoading: true }));
+      const products = await productsService.getAll(filter);
+      return set(() => ({ isLoading: false, data: products }));
     },
     create: async (product: Product | FormData) : Promise<Product> => {
       const createdProduct = await productsService.create(product);
