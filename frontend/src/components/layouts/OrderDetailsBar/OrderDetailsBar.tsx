@@ -45,9 +45,9 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
                 />
               </div>
             </div>
-            {products?.map((product, i) => (
+            {products?.map(product => (
               <Product
-                key={i}
+                key={product.id}
                 view='order-item'
                 product={product}
               />
