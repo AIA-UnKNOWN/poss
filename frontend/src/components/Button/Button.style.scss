@@ -14,7 +14,8 @@
   border: none;
   cursor: pointer;
 
-  &:active {
+  &:active,
+  &:disabled {
     background-color: globalVariables.$secondary-color;
   }
 

@@ -14,6 +14,7 @@ const Button: React.FC<Button> = props => {
     showLeftIcon = false,
     showText = true,
     size = 'md',
+    disabled = false,
     onClick,
   } = props;
 
@@ -56,6 +57,7 @@ const Button: React.FC<Button> = props => {
       id={id}
       className={`primary-button button-${size} ${className}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {showLeftIcon && renderIcon()}
       {showText && text}
