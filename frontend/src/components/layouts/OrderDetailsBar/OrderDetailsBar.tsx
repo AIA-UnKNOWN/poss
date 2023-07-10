@@ -8,6 +8,8 @@ import Button from 'src/components/Button';
 import SalesInfo from 'src/components/cards/SalesInfo/SalesInfo';
 import EmptyState from 'src/components/cards/EmptyState';
 import Input from 'src/components/Input/Input';
+// Hooks
+import useOrderDetailsBar from './OrderDetailsBar.hook';
 
 
 const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
@@ -16,6 +18,10 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
     (initialAmount, product) => initialAmount + (product.price * product.quantity),
     0
   );
+  const {
+    selectAllOrderCartItems,
+    removeSelectedOrderCartItems,
+  } = useOrderDetailsBar();
 
   return (
     <div className='order-details-bar'>
@@ -26,11 +32,13 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
             <div className='order-cart-actions-container'>
               <Input
                 type='checkbox'
+                onChange={e => selectAllOrderCartItems(e.target.checked)}
               />
               <div className='order-cart-actions'>
                 <Button
                   text='Remove'
                   size='sm'
+                  onClick={removeSelectedOrderCartItems}
                 />
               </div>
             </div>
