@@ -49,14 +49,25 @@ const Input: React.FC<Input> = props => {
       </div>
     );
   }
+
+  const renderInput = () => {
+    switch(props.type) {
+      case 'checkbox':
+        return (
+          <input type='checkbox' {...props} />
+        );
+      default:
+        return (
+          <div ref={inputContainerRef} className='input-container'>
+            {showIcon && view === 'hasLeftIcon' && renderIcon()}
+            <input ref={inputRef} {...props} />
+            {showIcon && view === 'hasRightIcon' && renderIcon()}
+          </div>
+        );
+    }
+  }
   
-  return (
-    <div ref={inputContainerRef} className='input-container'>
-      {showIcon && view === 'hasLeftIcon' && renderIcon()}
-      <input ref={inputRef} {...props} />
-      {showIcon && view === 'hasRightIcon' && renderIcon()}
-    </div>
-  );
+  return renderInput();
 }
 
 export default Input;
