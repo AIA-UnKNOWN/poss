@@ -4,6 +4,7 @@ import Button from '../../Button/Button';
 import useProduct from './Product.hook';
 // Store
 import useProductStore from 'src/store/products';
+import Input from 'src/components/Input';
 
 const Product: React.FC<ProductProps> = props => {
   const {
@@ -17,6 +18,7 @@ const Product: React.FC<ProductProps> = props => {
     price,
     photoUrl,
     quantity,
+    isSelected,
   } = product;
   const productStore = useProductStore();
   const {
@@ -30,6 +32,11 @@ const Product: React.FC<ProductProps> = props => {
       case 'order-item':
         return (
           <div className="product order-item">
+            <Input
+              type='checkbox'
+              checked={isSelected}
+              onChange={e => productStore.updateOrderCartItem({ id: product.id, isSelected: e.target.checked })}
+            />
             <div className='order-item-details'>
               <div className='product-image-container order-item'>
                 <img

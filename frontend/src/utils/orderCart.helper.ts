@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Product } from 'src/components/cards/Product/Product.types';
+import { Product, ProductWithId } from 'src/components/cards/Product/Product.types';
 
 export const ORDER_CART_ITEMS_KEY = 'oc-items';
 
@@ -32,7 +32,16 @@ const checkIfItemExist = (product: Product, products: Product[]) : boolean => {
   return !_.isEmpty(productFound);
 }
 
+const updateLocalStorageOrderCartItem = (product: ProductWithId) => {
+  const items = getOrderCartItems();
+  const wantedOrderCartItem = items.find(orderCartItem => orderCartItem.id === product.id);
+  if (!wantedOrderCartItem) return;
+  Object.assign(wantedOrderCartItem, product);
+  localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(items));
+}
+
 export {
   getOrderCartItems,
   addOrderCartItem,
+  updateLocalStorageOrderCartItem,
 }

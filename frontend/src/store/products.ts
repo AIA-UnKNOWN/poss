@@ -1,12 +1,12 @@
-import { create } from "zustand";
+import { create as createStore } from "zustand";
 import { devtools } from 'zustand/middleware';
 import _ from 'lodash';
 // Services
 import productsService from "src/services/products/products.service";
 // Types
-import type { Product } from "src/components/cards/Product/Product.types";
+import type { Product, ProductWithId } from "src/components/cards/Product/Product.types";
 // Utisl
-import { ORDER_CART_ITEMS_KEY, addOrderCartItem } from "src/utils/orderCart.helper";
+import { ORDER_CART_ITEMS_KEY, addOrderCartItem, updateLocalStorageOrderCartItem } from "src/utils/orderCart.helper";
 
 export type ProductState = {
   isLoading: boolean,
@@ -18,6 +18,7 @@ export type ProductState = {
   addOrderCartItem: (product: Product) => void,
   incrementCartItemQuantity: (productId: number) => void,
   decrementCartItemQuantity: (productId: number) => void,
+  updateOrderCartItem: (product: ProductWithId) => void,
 }
 
 export type GetAllFilter = {
@@ -26,7 +27,7 @@ export type GetAllFilter = {
   categoryId?: number;
 }
 
-const useProductStore = create<ProductState>()(
+const useProductStore = createStore<ProductState>()(
   devtools(set => ({
     isLoading: false,
     data: [],
@@ -50,8 +51,8 @@ const useProductStore = create<ProductState>()(
         if (orderCartItem) {
           orderCartItem.quantity += 1;
         } else {
-          addOrderCartItem({ ...product, quantity: 1 });
-          orderCartItems.push({ ...product, quantity: 1 });
+          addOrderCartItem({ ...product, quantity: 1, isSelected: false });
+          orderCartItems.push({ ...product, quantity: 1, isSelected: false });
         }
         localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(orderCartItems));
         return { orderCartItems: orderCartItems };
@@ -77,6 +78,16 @@ const useProductStore = create<ProductState>()(
           localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
         }
         return { orderCartItems: updatedOrderCartItems };
+      });
+    },
+    updateOrderCartItem: (product: ProductWithId) => {
+      updateLocalStorageOrderCartItem(product);
+      return set(state => {
+        const orderCartItems = state.orderCartItems;
+        const wantedOrderCartItem = orderCartItems.find(orderCartItem => orderCartItem.id === product.id);
+        if (!wantedOrderCartItem) return state;
+        Object.assign(wantedOrderCartItem, product);
+        return { orderCartItems };
       });
     },
   }))
