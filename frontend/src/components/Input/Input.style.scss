@@ -41,3 +41,10 @@
     }
   }
 }
+
+input[type="checkbox"] {
+  
+  &:checked {
+    accent-color: globalVariables.$primary-color;
+  }
+}
