@@ -22,6 +22,20 @@
       margin-bottom: 20px;
     }
 
+    .order-cart-actions-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0 0 5px;
+      
+      .order-cart-actions {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
     .order-items {
       display: flex;
       align-items: center;
