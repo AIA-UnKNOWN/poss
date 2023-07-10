@@ -19,6 +19,8 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
     0
   );
   const {
+    selectedOrderCartItems,
+    // Functions
     selectAllOrderCartItems,
     removeSelectedOrderCartItems,
   } = useOrderDetailsBar();
@@ -36,6 +38,7 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
               />
               <div className='order-cart-actions'>
                 <Button
+                  disabled={!selectedOrderCartItems.length}
                   text='Remove'
                   size='sm'
                   onClick={removeSelectedOrderCartItems}
