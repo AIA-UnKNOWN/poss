@@ -16,11 +16,13 @@ import useOrderDetailsBar from "./OrderDetailsBar.hook";
 
 const OrderDetailsBar: React.FC<OrderDetailsBarProps> = (props) => {
   const { products } = props;
-  const subtotal = products.reduce(
-    (initialAmount, product) =>
-      initialAmount + product.price * product.quantity,
-    0
-  );
+  const subtotal = products
+    .filter((product) => product.isSelected)
+    .reduce(
+      (initialAmount, product) =>
+        initialAmount + product.price * product.quantity,
+      0
+    );
   const {
     selectedOrderCartItems,
     isModalOpen,
