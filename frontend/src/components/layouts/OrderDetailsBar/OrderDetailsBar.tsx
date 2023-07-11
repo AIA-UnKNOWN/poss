@@ -1,21 +1,21 @@
-import './OrderDetailsBar.style.scss';
-import React from 'react';
+import "./OrderDetailsBar.style.scss";
+import React from "react";
 // Types
-import type { OrderDetailsBarProps } from './OrderDetailsBar.types';
+import type { OrderDetailsBarProps } from "./OrderDetailsBar.types";
 // Components
-import Product from 'src/components/cards/Product';
-import Button from 'src/components/Button';
-import SalesInfo from 'src/components/cards/SalesInfo/SalesInfo';
-import EmptyState from 'src/components/cards/EmptyState';
-import Input from 'src/components/Input/Input';
+import Product from "src/components/cards/Product";
+import Button from "src/components/Button";
+import SalesInfo from "src/components/cards/SalesInfo/SalesInfo";
+import EmptyState from "src/components/cards/EmptyState";
+import Input from "src/components/Input/Input";
 // Hooks
-import useOrderDetailsBar from './OrderDetailsBar.hook';
+import useOrderDetailsBar from "./OrderDetailsBar.hook";
 
-
-const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
+const OrderDetailsBar: React.FC<OrderDetailsBarProps> = (props) => {
   const { products } = props;
   const subtotal = products.reduce(
-    (initialAmount, product) => initialAmount + (product.price * product.quantity),
+    (initialAmount, product) =>
+      initialAmount + product.price * product.quantity,
     0
   );
   const {
@@ -26,50 +26,44 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = props => {
   } = useOrderDetailsBar();
 
   return (
-    <div className='order-details-bar'>
-      <div className='order-items-container'>
-        <span className='label'>Order Cart</span>
+    <div className="order-details-bar">
+      <div className="order-items-container">
+        <span className="label">Order Cart</span>
         {products.length > 0 ? (
-          <div className='order-items'>
-            <div className='order-cart-actions-container'>
+          <div className="order-items">
+            <div className="order-cart-actions-container">
               <Input
-                type='checkbox'
-                onChange={e => selectAllOrderCartItems(e.target.checked)}
+                type="checkbox"
+                onChange={(e) => selectAllOrderCartItems(e.target.checked)}
               />
-              <div className='order-cart-actions'>
+              <div className="order-cart-actions">
                 <Button
                   disabled={!selectedOrderCartItems.length}
-                  text='Remove'
-                  size='sm'
+                  text="Remove"
+                  size="sm"
                   onClick={removeSelectedOrderCartItems}
                 />
               </div>
             </div>
-            {products?.map(product => (
-              <Product
-                key={product.id}
-                view='order-item'
-                product={product}
-              />
+            {products?.map((product) => (
+              <Product key={product.id} view="order-item" product={product} />
             ))}
           </div>
         ) : (
           <EmptyState
-            text='No items in your cart.'
-            className='order-cart-items-empty-state'
+            text="No items in your cart."
+            className="order-cart-items-empty-state"
           />
         )}
       </div>
-      <div className='order-amount-info'>
-        <div className='sales-info-container'>
+      <div className="order-amount-info">
+        <div className="sales-info-container">
           <SalesInfo subTotal={subtotal} />
         </div>
-        <Button
-          text='Checkout'
-        />
+        <Button text="Checkout" />
       </div>
     </div>
   );
-}
+};
 
 export default OrderDetailsBar;
