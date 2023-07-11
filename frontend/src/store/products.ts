@@ -1,34 +1,41 @@
 import { create as createStore } from "zustand";
-import { devtools } from 'zustand/middleware';
-import _ from 'lodash';
+import { devtools } from "zustand/middleware";
+import _ from "lodash";
 // Services
 import productsService from "src/services/products/products.service";
 // Types
-import type { Product, ProductWithId } from "src/components/cards/Product/Product.types";
-// Utisl
-import { ORDER_CART_ITEMS_KEY, addOrderCartItem, updateLocalStorageOrderCartItem } from "src/utils/orderCart.helper";
+import type {
+  Product,
+  ProductWithId,
+} from "src/components/cards/Product/Product.types";
+// Utils
+import {
+  ORDER_CART_ITEMS_KEY,
+  addOrderCartItem,
+  updateLocalStorageOrderCartItem,
+} from "src/utils/orderCart.helper";
 
 export type ProductState = {
-  isLoading: boolean,
-  data: Product[],
-  orderCartItems: Product[],
-  getAll: (filter?: GetAllFilter) => Promise<void>,
-  create: (product: Product) => Promise<Product>,
-  setOrderCartItems: (products: Product[]) => void,
-  addOrderCartItem: (product: Product) => void,
-  incrementCartItemQuantity: (productId: number) => void,
-  decrementCartItemQuantity: (productId: number) => void,
-  updateOrderCartItem: (product: ProductWithId) => void,
-}
+  isLoading: boolean;
+  data: Product[];
+  orderCartItems: Product[];
+  getAll: (filter?: GetAllFilter) => Promise<void>;
+  create: (product: Product) => Promise<Product>;
+  setOrderCartItems: (products: Product[]) => void;
+  addOrderCartItem: (product: Product) => void;
+  incrementCartItemQuantity: (productId: number) => void;
+  decrementCartItemQuantity: (productId: number) => void;
+  updateOrderCartItem: (product: ProductWithId) => void;
+};
 
 export type GetAllFilter = {
   name?: string;
   code?: string;
   categoryId?: number;
-}
+};
 
 const useProductStore = createStore<ProductState>()(
-  devtools(set => ({
+  devtools((set) => ({
     isLoading: false,
     data: [],
     orderCartItems: [],
@@ -37,7 +44,7 @@ const useProductStore = createStore<ProductState>()(
       const products = await productsService.getAll(filter);
       return set(() => ({ isLoading: false, data: products }));
     },
-    create: async (product: Product | FormData) : Promise<Product> => {
+    create: async (product: Product | FormData): Promise<Product> => {
       const createdProduct = await productsService.create(product);
       return createdProduct;
     },
@@ -54,17 +61,25 @@ const useProductStore = createStore<ProductState>()(
           addOrderCartItem({ ...product, quantity: 1, isSelected: false });
           orderCartItems.push({ ...product, quantity: 1, isSelected: false });
         }
-        localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(orderCartItems));
+        localStorage.setItem(
+          ORDER_CART_ITEMS_KEY,
+          JSON.stringify(orderCartItems)
+        );
         return { orderCartItems: orderCartItems };
       });
     },
     incrementCartItemQuantity: (productId: number) => {
       return set((state) => {
         const updatedOrderCartItems = _.cloneDeep(state.orderCartItems);
-        const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
+        const updatedCartItem = _.find(updatedOrderCartItems, {
+          id: productId,
+        });
         if (updatedCartItem) {
           updatedCartItem.quantity += 1;
-          localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
+          localStorage.setItem(
+            ORDER_CART_ITEMS_KEY,
+            JSON.stringify(updatedOrderCartItems)
+          );
         }
         return { orderCartItems: updatedOrderCartItems };
       });
@@ -72,19 +87,26 @@ const useProductStore = createStore<ProductState>()(
     decrementCartItemQuantity: (productId: number) => {
       return set((state) => {
         const updatedOrderCartItems = _.cloneDeep(state.orderCartItems);
-        const updatedCartItem = _.find(updatedOrderCartItems, { id: productId });
+        const updatedCartItem = _.find(updatedOrderCartItems, {
+          id: productId,
+        });
         if (updatedCartItem && updatedCartItem.quantity > 0) {
           updatedCartItem.quantity -= 1;
-          localStorage.setItem(ORDER_CART_ITEMS_KEY, JSON.stringify(updatedOrderCartItems));
+          localStorage.setItem(
+            ORDER_CART_ITEMS_KEY,
+            JSON.stringify(updatedOrderCartItems)
+          );
         }
         return { orderCartItems: updatedOrderCartItems };
       });
     },
     updateOrderCartItem: (product: ProductWithId) => {
       updateLocalStorageOrderCartItem(product);
-      return set(state => {
+      return set((state) => {
         const orderCartItems = state.orderCartItems;
-        const wantedOrderCartItem = orderCartItems.find(orderCartItem => orderCartItem.id === product.id);
+        const wantedOrderCartItem = orderCartItems.find(
+          (orderCartItem) => orderCartItem.id === product.id
+        );
         if (!wantedOrderCartItem) return state;
         Object.assign(wantedOrderCartItem, product);
         return { orderCartItems };
