@@ -14,6 +14,7 @@ const Checkout = (props) => {
     // Functions
     handleAmountReceivedChange,
     handleAmountChangeChange,
+    pay,
   } = useCheckoutModal(props);
 
   return (
@@ -37,7 +38,7 @@ const Checkout = (props) => {
           onChange={(e) => handleAmountChangeChange(e.target.value)}
         />
       </div>
-      <Button text={"Pay"} onClick={() => console.log("Paid")} />
+      <Button text={"Pay"} onClick={pay} />
     </div>
   );
 };

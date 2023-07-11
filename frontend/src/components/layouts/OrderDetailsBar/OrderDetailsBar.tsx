@@ -36,7 +36,9 @@ const OrderDetailsBar: React.FC<OrderDetailsBarProps> = (props) => {
   const renderModalContent = () => {
     switch (modalLabel) {
       case "CHECKOUT":
-        return <Checkout subtotal={subtotal} />;
+        return (
+          <Checkout subtotal={subtotal} onCloseModal={() => toggleModal()} />
+        );
     }
   };
 

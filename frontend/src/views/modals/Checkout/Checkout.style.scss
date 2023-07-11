@@ -1,3 +1,4 @@
+@use "src/variables" as globalVariables;
 @use "src/views/modals/AddCategory/AddCategory.styles";
 
 .checkout-modal-content {
@@ -8,4 +9,8 @@
   .sales-info-container {
     padding: 0 10px;
   }
+}
+
+.poss-swal-popup-title {
+  font-family: globalVariables.$font-family;
 }
