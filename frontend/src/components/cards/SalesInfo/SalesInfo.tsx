@@ -1,20 +1,22 @@
-import React from 'react';
-import './SalesInfo.style.scss';
-import type { SalesInfoProps } from './SalesInfo.types';
+import React from "react";
+import "./SalesInfo.style.scss";
+import type { SalesInfoProps } from "./SalesInfo.types";
 
+export const TAX_SALES = 50;
+export const DISCOUNT_SALES = 0;
 
 const SalesInfo: React.FC<SalesInfoProps> = (props) => {
   const { subTotal } = props;
-  const DISCOUNT_SALES = 0;
-  const TAX_SALES = 50;
   const TOTAL = (subTotal || 0) + DISCOUNT_SALES + TAX_SALES;
-  
+
   return (
     <div className="sales-info">
       <div className="sales-info_details">
         <div className="sales-info_item">
           <span className="sales-info_label">Subtotal</span>
-          <span className="sales-info_value">${(subTotal || 0).toFixed(2)}</span>
+          <span className="sales-info_value">
+            ${(subTotal || 0).toFixed(2)}
+          </span>
         </div>
         <div className="sales-info_item">
           <span className="sales-info_label">Discount sales</span>
