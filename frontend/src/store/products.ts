@@ -11,7 +11,7 @@ import type {
 // Utils
 import {
   ORDER_CART_ITEMS_KEY,
-  addOrderCartItem,
+  addLocalStorageOrderCartItem,
   updateLocalStorageOrderCartItem,
 } from "src/utils/orderCart.helper";
 
@@ -58,7 +58,11 @@ const useProductStore = createStore<ProductState>()(
         if (orderCartItem) {
           orderCartItem.quantity += 1;
         } else {
-          addOrderCartItem({ ...product, quantity: 1, isSelected: false });
+          addLocalStorageOrderCartItem({
+            ...product,
+            quantity: 1,
+            isSelected: false,
+          });
           orderCartItems.push({ ...product, quantity: 1, isSelected: false });
         }
         localStorage.setItem(
