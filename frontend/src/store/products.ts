@@ -90,7 +90,7 @@ const useProductStore = createStore<ProductState>()(
         const updatedCartItem = _.find(updatedOrderCartItems, {
           id: productId,
         });
-        if (updatedCartItem && updatedCartItem.quantity > 0) {
+        if (updatedCartItem && updatedCartItem.quantity > 1) {
           updatedCartItem.quantity -= 1;
           localStorage.setItem(
             ORDER_CART_ITEMS_KEY,
