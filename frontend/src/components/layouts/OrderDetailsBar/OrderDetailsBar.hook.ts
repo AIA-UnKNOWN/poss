@@ -14,6 +14,8 @@ const useOrderDetailsBar = () => {
   const [selectedOrderCartItems, setSelectedOrderCartItems] = useState<
     Product[]
   >([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalLabel, setModalLabel] = useState("");
 
   useEffect(() => {
     getSelectedProducts();
@@ -60,9 +62,18 @@ const useOrderDetailsBar = () => {
     );
   };
 
+  const toggleModal = (label?: string) => {
+    setIsModalOpen(!isModalOpen);
+    if (!label) return;
+    setModalLabel(label);
+  };
+
   return {
     selectedOrderCartItems,
+    isModalOpen,
+    modalLabel,
     // Functions
+    toggleModal,
     selectAllOrderCartItems,
     removeSelectedOrderCartItems,
   };

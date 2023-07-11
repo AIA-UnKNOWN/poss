@@ -1,0 +1,11 @@
+@use "src/views/modals/AddCategory/AddCategory.styles";
+
+.checkout-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .sales-info-container {
+    padding: 0 10px;
+  }
+}
