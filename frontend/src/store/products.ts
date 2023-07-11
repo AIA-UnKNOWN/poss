@@ -61,9 +61,9 @@ const useProductStore = createStore<ProductState>()(
           addLocalStorageOrderCartItem({
             ...product,
             quantity: 1,
-            isSelected: false,
+            isSelected: true,
           });
-          orderCartItems.push({ ...product, quantity: 1, isSelected: false });
+          orderCartItems.push({ ...product, quantity: 1, isSelected: true });
         }
         localStorage.setItem(
           ORDER_CART_ITEMS_KEY,
