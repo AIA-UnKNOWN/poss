@@ -2,8 +2,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 // Constants
 import { TAX_SALES } from "src/components/cards/SalesInfo/SalesInfo";
+// Store
+import useProductStore from "src/store/products";
+// Utils
+import { ORDER_CART_ITEMS_KEY } from "src/utils/orderCart.helper";
 
 const useCheckoutModal = (props) => {
+  const productStore = useProductStore();
   const { subtotal, onCloseModal } = props;
   const [amountReceived, setAmountReceived] = useState("");
   const [amountChange, setAmountChange] = useState("");
@@ -27,6 +32,7 @@ const useCheckoutModal = (props) => {
       amountReceived === "" // If no amount received
     )
       return;
+    removeSelectedOrderCartItems();
     onCloseModal?.();
     Swal.fire({
       position: "center",
@@ -38,6 +44,17 @@ const useCheckoutModal = (props) => {
         title: "poss-swal-popup-title",
       },
     });
+  };
+
+  const removeSelectedOrderCartItems = () => {
+    const unselectedOrderCartItems = productStore.orderCartItems.filter(
+      (orderCartItem) => !orderCartItem.isSelected
+    );
+    productStore.setOrderCartItems(unselectedOrderCartItems);
+    localStorage.setItem(
+      ORDER_CART_ITEMS_KEY,
+      JSON.stringify(unselectedOrderCartItems)
+    );
   };
 
   return {
