@@ -1,4 +1,9 @@
-import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 import * as _ from 'lodash';
 import { Product } from './entity/product.entity';
@@ -9,7 +14,6 @@ import { Category } from 'src/modules/categories/entity/category.entity';
 
 @Injectable()
 export class ProductsService {
-
   constructor(
     @Inject(PRODUCT_REPOSITORY)
     private productsRepository: Repository<Product>,
@@ -24,9 +28,15 @@ export class ProductsService {
   }
 
   async create(productData: ProductDto): Promise<Product> {
-    if (_.isEmpty(productData)) throw new BadRequestException("Failed to create product due to empty payload");
-    if (!productData.categoryId) return this.productsRepository.save(productData);
-    const category = await this.categoriesRepository.findOneBy({ id: productData.categoryId });
+    if (_.isEmpty(productData))
+      throw new BadRequestException(
+        'Failed to create product due to empty payload',
+      );
+    if (!productData.categoryId)
+      return this.productsRepository.save(productData);
+    const category = await this.categoriesRepository.findOneBy({
+      id: productData.categoryId,
+    });
     const product = new Product();
     product.name = productData.name;
     product.description = productData.description;
@@ -40,10 +50,12 @@ export class ProductsService {
   findAll(filter?: FindAllFilter): Promise<Product[]> {
     return this.productsRepository.find({
       where: {
-        category: filter.categoryId ? {
-          id: filter.categoryId
-        } : undefined,
-      }
+        category: filter.categoryId
+          ? {
+              id: filter.categoryId,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -52,8 +64,10 @@ export class ProductsService {
   }
 
   async update(productData: Product) {
-    if (_.isEmpty(productData)) throw new BadRequestException("Failed to update product due to empty payload");
+    if (_.isEmpty(productData))
+      throw new BadRequestException(
+        'Failed to update product due to empty payload',
+      );
     await this.productsRepository.save(productData);
   }
-
 }

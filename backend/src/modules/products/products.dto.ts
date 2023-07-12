@@ -1,8 +1,7 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { Category } from "src/modules/categories/entity/category.entity";
+import { Category } from 'src/modules/categories/entity/category.entity';
 
 export class ProductDto {
-
   @IsNotEmpty()
   name: string;
 
@@ -17,19 +16,18 @@ export class ProductDto {
 
   @IsOptional()
   code?: string;
-  
+
   @IsOptional()
   photoUrl?: string;
-  
+
   @IsOptional()
   categoryId?: number;
-  
+
   @IsOptional()
   category?: Category;
 }
 
 export class FindAllFilter {
-
   @IsOptional()
   name?: string;
 
@@ -38,5 +36,4 @@ export class FindAllFilter {
 
   @IsOptional()
   categoryId?: number;
-
 }

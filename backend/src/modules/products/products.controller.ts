@@ -1,6 +1,20 @@
-import { Controller, Post, Body, UseGuards, Get, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, FileTypeValidator, Put, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Get,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  FileTypeValidator,
+  Put,
+  Query,
+} from '@nestjs/common';
 import * as _ from 'lodash';
-import { Express } from 'express'
+import { Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FindAllFilter, ProductDto } from './products.dto';
@@ -11,10 +25,7 @@ import { Product } from './entity/product.entity';
 @Controller('products')
 @UseGuards(AuthGuard)
 export class ProductsController {
-
-  constructor(
-    private readonly productsService: ProductsService
-  ) {}
+  constructor(private readonly productsService: ProductsService) {}
 
   @Post()
   @UseInterceptors(
@@ -26,19 +37,17 @@ export class ProductsController {
           callback(null, newFileName);
         },
       }),
-    })
+    }),
   )
   create(
     @Body() product: ProductDto,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new FileTypeValidator({ fileType: 'image/*' }),
-        ],
-        fileIsRequired: false
+        validators: [new FileTypeValidator({ fileType: 'image/*' })],
+        fileIsRequired: false,
       }),
     )
-    file?: Express.Multer.File
+    file?: Express.Multer.File,
   ) {
     return this.productsService.create({
       ...product,
@@ -65,5 +74,4 @@ export class ProductsController {
   delete(@Param('productId') productId: number) {
     return this.productsService.remove(productId);
   }
-
 }
