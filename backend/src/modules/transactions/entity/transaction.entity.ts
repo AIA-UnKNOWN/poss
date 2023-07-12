@@ -8,10 +8,10 @@ export class Transaction extends BaseEntity {
   @Column({ default: 0 })
   totalAmount: number;
 
-  @Column({ nullable: false })
+  @Column()
   amountReceived: number;
 
-  @Column({ default: 0 })
+  @Column({ default: 0, nullable: true })
   amountChange: number;
 
   @ManyToOne(() => User, (user) => user.transactions, { cascade: true })

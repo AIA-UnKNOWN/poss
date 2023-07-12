@@ -15,6 +15,6 @@ export class Order extends BaseEntity {
   })
   transaction: Transaction;
 
-  @Column({ nullable: false })
+  @Column()
   quantiy: number;
 }
