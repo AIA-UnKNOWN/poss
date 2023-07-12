@@ -1,11 +1,4 @@
-import {
-  BadGatewayException,
-  Body,
-  Controller,
-  Get,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { OrdersService } from './orders.service';
 import { OrderDto } from './orders.dto';

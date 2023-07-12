@@ -3,19 +3,23 @@ import { ORDER_REPOSITORY } from './orders.provider';
 import { InsertResult, Repository } from 'typeorm';
 import { Order } from './entity/order.entity';
 import { OrderDto } from './orders.dto';
+import { PRODUCT_REPOSITORY } from '../products/products.provider';
+import { Product } from '../products/entity/product.entity';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @Inject(ORDER_REPOSITORY)
     private ordersRepository: Repository<Order>,
+    @Inject(PRODUCT_REPOSITORY)
+    private productsRepository: Repository<Product>,
   ) {}
 
   findAll(): Promise<Order[]> {
     return this.ordersRepository.find();
   }
 
-  bulkCreate(orders: OrderDto[]): Promise<InsertResult> {
+  async bulkCreate(orders: OrderDto[]): Promise<InsertResult> {
     const hasRequiredOrderProps = (order: OrderDto) =>
       order.productId !== undefined &&
       typeof order.productId === 'number' &&
@@ -33,7 +37,7 @@ export class OrdersService {
         `Failed to bulk create due to incorrect payload. Each order should include 'productId', 'transactionId', and 'quantity' properties`,
       );
 
-    return this.ordersRepository
+    const insertResult = await this.ordersRepository
       .createQueryBuilder()
       .insert()
       .values(
@@ -48,5 +52,27 @@ export class OrdersService {
         })),
       )
       .execute();
+
+    const insertedOrderIds = insertResult.identifiers.map((order) => order.id);
+    Promise.all(
+      insertedOrderIds.map(async (insertedOrderId) => {
+        const order = await this.ordersRepository.findOne({
+          where: {
+            id: insertedOrderId,
+          },
+          relations: {
+            product: true,
+          },
+        });
+        const product = await this.productsRepository.findOneBy({
+          id: order.product.id,
+        });
+        product.quantity = product.quantity - order.quantiy;
+        await this.productsRepository.save(product);
+        return order;
+      }),
+    );
+
+    return insertResult;
   }
 }
