@@ -1,10 +1,13 @@
-export type Transaction = {
+export type TransactionUI = {
   id: number;
   totalAmount: number;
-  createdDate: string;
-}
-
+  amountReceived: number;
+  amountChange: number;
+  userId: number;
+  updatedDate: Date | string;
+  createdDate: Date | string;
+};
 export interface TransactionProps {
-  transaction: Transaction;
-  onClick?: (transaction: Transaction) => any;
+  transaction: TransactionUI;
+  onClick?: (transaction: TransactionUI) => any;
 }
