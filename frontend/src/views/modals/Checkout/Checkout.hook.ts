@@ -5,12 +5,14 @@ import { TAX_SALES } from "src/components/cards/SalesInfo/SalesInfo";
 // Store
 import useProductStore from "src/store/products";
 import useTransactionStore from "src/store/transactions";
+import useOrdersStore from "src/store/orders";
 // Utils
 import { ORDER_CART_ITEMS_KEY } from "src/utils/orderCart.helper";
 
 const useCheckoutModal = (props) => {
   const productStore = useProductStore();
   const transactionStore = useTransactionStore();
+  const orderStore = useOrdersStore();
   const { subtotal, onCloseModal } = props;
   const [amountReceived, setAmountReceived] = useState("");
   const [amountChange, setAmountChange] = useState("");
@@ -37,11 +39,22 @@ const useCheckoutModal = (props) => {
       return;
 
     setPayButtonText("Paying...");
-    await transactionStore.create({
+    const selectedOrderCartItems = productStore.orderCartItems.filter(
+      (orderCartItem) => orderCartItem.isSelected
+    );
+    const createdTransaction = await transactionStore.create({
       amountReceived: parseInt(amountReceived),
       amountChange: parseInt(amountChange),
       totalAmount: parseInt(subtotal) + TAX_SALES,
     });
+    await orderStore.bulkCreate(
+      selectedOrderCartItems.map((orderCartItem) => ({
+        productId: orderCartItem.id,
+        quantity: orderCartItem.quantity,
+        transactionId: createdTransaction.id,
+      }))
+    );
+    productStore.getAll();
     setPayButtonText("Pay");
     removeSelectedOrderCartItems();
     onCloseModal?.();

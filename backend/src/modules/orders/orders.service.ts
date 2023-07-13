@@ -54,7 +54,7 @@ export class OrdersService {
       .execute();
 
     const insertedOrderIds = insertResult.identifiers.map((order) => order.id);
-    Promise.all(
+    await Promise.all(
       insertedOrderIds.map(async (insertedOrderId) => {
         const order = await this.ordersRepository.findOne({
           where: {
