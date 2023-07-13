@@ -4,14 +4,17 @@ import Swal from "sweetalert2";
 import { TAX_SALES } from "src/components/cards/SalesInfo/SalesInfo";
 // Store
 import useProductStore from "src/store/products";
+import useTransactionStore from "src/store/transactions";
 // Utils
 import { ORDER_CART_ITEMS_KEY } from "src/utils/orderCart.helper";
 
 const useCheckoutModal = (props) => {
   const productStore = useProductStore();
+  const transactionStore = useTransactionStore();
   const { subtotal, onCloseModal } = props;
   const [amountReceived, setAmountReceived] = useState("");
   const [amountChange, setAmountChange] = useState("");
+  const [payButtonText, setPayButtonText] = useState("Pay");
 
   const handleAmountReceivedChange = (amountReceived: string) => {
     if (amountReceived.length === 1 && amountReceived === "0") return;
@@ -25,13 +28,21 @@ const useCheckoutModal = (props) => {
     setAmountChange(amountChange);
   };
 
-  const pay = () => {
+  const pay = async () => {
     if (
       amountChange === "" || // If no amount change calculated
       parseInt(amountChange) < 0 || // If amount change is less than zero (means debt)
       amountReceived === "" // If no amount received
     )
       return;
+
+    setPayButtonText("Paying...");
+    await transactionStore.create({
+      amountReceived: parseInt(amountReceived),
+      amountChange: parseInt(amountChange),
+      totalAmount: parseInt(subtotal) + TAX_SALES,
+    });
+    setPayButtonText("Pay");
     removeSelectedOrderCartItems();
     onCloseModal?.();
     Swal.fire({
@@ -60,6 +71,7 @@ const useCheckoutModal = (props) => {
   return {
     amountChange,
     amountReceived,
+    payButtonText,
     // Functions
     handleAmountReceivedChange,
     handleAmountChangeChange,

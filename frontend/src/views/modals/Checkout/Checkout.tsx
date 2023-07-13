@@ -11,6 +11,7 @@ const Checkout = (props) => {
   const {
     amountChange,
     amountReceived,
+    payButtonText,
     // Functions
     handleAmountReceivedChange,
     handleAmountChangeChange,
@@ -38,7 +39,7 @@ const Checkout = (props) => {
           onChange={(e) => handleAmountChangeChange(e.target.value)}
         />
       </div>
-      <Button text={"Pay"} onClick={pay} />
+      <Button text={payButtonText} onClick={pay} />
     </div>
   );
 };

@@ -5,10 +5,17 @@ import transactionsService from "src/services/transactions/transactions.service"
 // Types
 import { TransactionUI } from "src/components/cards/Transaction/Transaction.types";
 
+export type TransactionDto = {
+  totalAmount: number;
+  amountReceived: number;
+  amountChange: number;
+};
+
 export type TransactionState = {
   isLoading: boolean;
   data: TransactionUI[];
   getAll: () => Promise<void>;
+  create: (transactionData: TransactionDto) => Promise<TransactionUI>;
 };
 
 const useTransactionStore = createStore<TransactionState>()(
@@ -19,6 +26,12 @@ const useTransactionStore = createStore<TransactionState>()(
       set(() => ({ isLoading: true }));
       const transactions = await transactionsService.getAll();
       return set(() => ({ isLoading: false, data: transactions }));
+    },
+    create: async (transactionData: TransactionDto): Promise<TransactionUI> => {
+      const createdTransaction = await transactionsService.create(
+        transactionData
+      );
+      return createdTransaction;
     },
   }))
 );
